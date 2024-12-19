@@ -46,7 +46,7 @@ if (isset($_POST['id']) && !isset($_POST['action'])) {
 
         // jika stok tidak 0
         if($product['stock'] > 0) {
-            $medInCart = mysqli_query($conn, "SELECT * FROM med_cart WHERE username = '$username' AND med_id = '$medId'");
+            $medInCart = mysqli_query($conn, "SELECT * FROM med_cart WHERE username = '$username' AND med_id = '$medId' AND status = 'unpaid'");
             if(mysqli_num_rows($medInCart) == 1) {
                 incrementQty($medId, $conn, $username);
             } else {
@@ -74,7 +74,7 @@ if (isset($_POST['action']) && isset($_POST['id'])) {
                                                                     medicine.stock as stock
                                                                     FROM med_cart
                                                                     JOIN medicine ON medicine.id = med_cart.med_id
-                                                                    WHERE med_cart.username = '$username' AND med_cart.med_id = '$id'"));
+                                                                    WHERE med_cart.username = '$username' AND med_cart.med_id = '$id' AND med_cart.status = 'unpaid'"));
     // var_dump($medicineQty); die;
     if($action === 'plus' && (int)$medicineQty['quantity'] < (int)$medicineQty['stock']) {
         // echo "tambah"; die;
@@ -190,11 +190,11 @@ function decrementQty($medId, $conn, $username) {
 }
 
 function insertMedCart($medId, $conn, $username) {
-    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '1', '$username')");
+    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '1', '$username', 'unpaid')");
 }
 
 function deleteMedCart($medId, $conn, $username) {
-    mysqli_query($conn, "DELETE FROM med_cart WHERE med_id = '$medId' AND username = '$username'");
+    mysqli_query($conn, "DELETE FROM med_cart WHERE med_id = '$medId' AND username = '$username' AND status = 'unpaid'");
 }
 
 ?>

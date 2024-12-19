@@ -115,7 +115,7 @@ if(isset($_POST["konfirmasi"])) {
     //     exit;
     // }
     // set med menjadi upcoming
-    mysqli_query($conn, "UPDATE med_cart SET status = 'upcoming' WHERE username = '$username' AND status != 'completed'");
+    mysqli_query($conn, "UPDATE med_cart SET status = 'completed' WHERE username = '$username'");
     
     // set mcu menjadi upcoming
     mysqli_query($conn, "UPDATE mcu SET status = 'upcoming' WHERE username = '$username' AND status != 'completed'");
