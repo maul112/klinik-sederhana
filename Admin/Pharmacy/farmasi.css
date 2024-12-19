@@ -1,0 +1,256 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.sidebar {
+    position: fixed;
+    left: -300px; /* Hidden by default */
+    top: 0;
+    width: 250px; /* Adjust width as needed */
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto; /* Ensure content is scrollable */
+    padding: 20px; /* Add some padding for better appearance */
+}
+
+
+/* Sidebar open state */
+.sidebar.open {
+    left: 0;
+}
+
+/* Sidebar logo styling */
+.sidebar .logo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.sidebar .logo img {
+    width: 100px;
+}
+
+.sidebar .logo h1 {
+    margin: 10px 0 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.sidebar .logo p {
+    font-size: 10px;
+    color: #333;
+}
+
+/* Sidebar button styling */
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    border-radius: 5px;
+}
+
+.sidebar-btn.active,
+.sidebar-btn:hover {
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    color: #fff;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    transition: margin-left 0.3s ease;
+    width: 100%; /* Full width initially */
+    margin-left: 0; /* No margin initially */
+}
+
+body.sidebar-open .main-content {
+    margin-left: 300px; /* Shifted when sidebar is open */
+    width: calc(100% - 250px); /* Adjusted width when sidebar is open */
+}
+
+.sidebar-toggle {
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-right: 20px; /* Space to the right of the button */
+}
+
+.container {
+    width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.add-pdf, .filterbtn {
+    background-color: #7A5AF8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+.category {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    color: #6c757d;
+}
+
+.category-button {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: center;
+    padding: 15px;
+}
+
+th {
+    background-color: #f8f8f8;
+    font-weight: normal;
+    color: #6c757d;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+    color: #495057;
+    font-size: 14px;
+    position: relative;
+}
+
+input[type="checkbox"] {
+    margin: 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+form input, form select {
+    margin-top: 5px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #6c757d;
+}
+
+/* form button {
+    margin-top: 15px;
+} */
+
+form button:hover {
+    color: #fff;
+    background-color: #7A5AF8;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 5px 10px;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 0 5px;
+    display: inline-block;
+    border: none;
+}
+
+.btn-save {
+    background-color: #7f8ff4;
+}
+
+.btn-delete {
+    background-color: #ff6b6b;
+}

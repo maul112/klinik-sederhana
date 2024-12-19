@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 20px; /* Space from top */
+}
+
+.card a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+h1 {
+    font-size: 2.3rem; /* Increased font size */
+    font-weight: 750;
+    color: #2c2e3e;
+    margin: 0 5px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    border: 1px solid #92A3FD;
+    background-color: rgba(255, 255, 255, 0.252);
+    padding: 10px 51px;
+    margin: 0 20px;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-button.active,
+.filter-button:hover {
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    color: white;
+}
+
+p {
+    margin: 50px;
+    text-align: center;
+    font-size: large;
+    color: #888;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: black; /* Warna default (putih) */
+}

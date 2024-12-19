@@ -1,0 +1,228 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 20px; /* Space from top */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+h1 {
+    font-size: 2.3rem; /* Increased font size */
+    font-weight: 750;
+    color: #2c2e3e;
+    margin: 0;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 15px 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+}
+
+.card .icon {
+    justify-content: center;
+    margin-left: 40px;
+    margin-right: 30px; /* Space between icon and text */
+}
+
+.card .icon img {
+    width: 70px; /* Adjust the size of the icons if needed */
+    height: 70px;
+}
+
+.card .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a{   
+  text-decoration: none;
+}
+
+.card .content h2 {
+    margin: 0;
+    font-size: 20px; /* Increased font size */
+    font-weight: 600;
+    color: #2c2e3e;
+}
+
+.card .content p {
+    margin: 5px 0 0;
+    font-size: 16px; /* Increased font size */
+    color: #737373;
+}
+
+.card:hover .content h2 {
+    color: #f4f4f9;
+}
+
+/* Modal styles */
+
+.upload-card{
+    cursor: pointer; /* Make cards clickable */
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: fit-content;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close {
+    color: #333;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -10px;
+    margin-right: -10px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #f00;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom file upload styles */
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    color: #595959;
+    border: 1px solid #b7b5b5; /* Corrected border property */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+    overflow: hidden; /* Ensures overflow content is hidden */
+    white-space: nowrap; /* Prevents text from wrapping */
+    text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+}
+
+.file-name {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 16px;
+    color:  #6b6b6b;
+    overflow: hidden; /* Ensures overflow content is hidden */
+    white-space: nowrap; /* Prevents text from wrapping */
+    text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+}
+
+
+.custom-file-upload:hover {
+    background-color: #c5c5c5;
+}
+
+
+.modal-content button {
+    padding: 10px 15px;
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+}
+
+.modal-content button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5);
+}

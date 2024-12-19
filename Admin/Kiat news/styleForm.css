@@ -1,0 +1,37 @@
+.add-news-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.add-news-form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.add-news-form input, .add-news-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.add-news-form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-news-form button:hover {
+    background-color: #45a049;
+}
+
+.add-news-form button[type="button"] {
+    background-color: #f44336;
+}

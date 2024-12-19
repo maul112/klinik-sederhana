@@ -1,0 +1,150 @@
+:root {
+    --primary: #92A3DF;
+    --secondary: #9DCEFF;
+    --purple: #C58BF2;
+    --pink: #EEA4CE;
+    --black: #1D1617;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'poppins';
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+.gambar {
+    flex: 1;
+    display: flex;
+    background-image: linear-gradient(to right, var(--secondary), var(--primary));
+}
+
+.gambar img {
+    width: 20rem;
+    height: 20rem;
+    margin: auto;
+    mix-blend-mode: multiply;
+}
+
+
+/* navbar start */
+
+.navbar {
+    width: 100%;
+    padding: 10px;
+    display: block;
+    text-align: right;
+    margin-top: 2rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    margin-right: 1rem;
+    color: #92A3DF;
+    font-size: var(--smallFont);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.container-form {
+    width: 70%;
+    margin-left: 4rem;
+    
+}
+
+/* navbar end */
+
+/* header start */
+
+.container-login {
+    margin: 0 auto;
+    flex: 1;
+}
+
+.container-login h1 {
+    font-weight: 600;
+    font-size: var(--headerFont);
+    margin-top: 4rem;
+    width: 50%;
+}
+/* header end */
+
+/* input start */
+
+.inputfield {
+    margin-top: 3rem;
+}
+
+.email, .password {
+    padding: 5px 1rem;
+    margin: 1.5rem 0;
+    border-radius: 1rem;
+    border: 1px solid gray;
+}
+
+.email label, .password label {
+    display: block;
+}
+
+.email input, .password input {
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.password {
+    position: relative;
+}
+
+ion-icon {
+    font-size: 1.7rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.button {
+    margin-top: 0.7rem;
+    width: 100%;
+    padding: 0.8rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 5rem;
+    background-image: linear-gradient(to right, var(--secondary), var(--primary));
+    color: white;
+}
+
+.container-form p {
+    text-align: center;
+    position: relative;
+    bottom: 0.7rem;
+    background-color: white;
+    width: 8rem;
+    margin: auto;
+    font-size: 0.9rem;
+}
+
+/* input end */
+
+
+/* @media (min-width: 600px) {
+    
+    .container1 {
+        height: 100vh;
+        display: flex;
+    }
+    
+    .container2 {
+        margin: auto;
+        box-shadow: 0 0 1rem black;
+        border-radius: 1rem;
+    }
+    
+} */

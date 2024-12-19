@@ -1,0 +1,134 @@
+/* Reset some default styles for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; 
+}
+body {
+  margin: 0;
+  background: linear-gradient(to right,#fff, #fff);
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  width: 70%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, #9fbaef, #8fc3ff);
+  padding: 20px;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #fff;
+  display: block;
+}
+
+.image-wrapper {
+  position: relative;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+.change-photo-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #8fc3ff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+.change-photo-icon:hover {
+  background-color: #2575fc;
+}
+
+.camera-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-label {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.form-section {
+  flex: 1.5;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: auto;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+input, select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.btn-submit {
+  background: linear-gradient(to right, #9fbaef, #8fc3ff);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-submit:hover {
+  opacity: 0.8;
+}

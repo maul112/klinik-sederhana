@@ -1,0 +1,144 @@
+:root {
+    --primary: #92a3df;
+    --secondary: #9dceff;
+    --purple: #c58bf2;
+    --pink: #eea4ce;
+    --black: #1d1617;
+}
+  
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+  
+.container {
+    display: flex;
+    height: 100vh;
+}
+  
+.left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    background-color: #f8f9fa; /* Tambahkan latar belakang untuk perbedaan visual */
+}
+
+.nomor {
+    margin-top: 2rem;
+    width: 80%;
+    height: 35%;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 8rem;
+    border-radius: 1rem;
+    background-image: linear-gradient(to right, var(--secondary), var(--primary));
+    color: white;
+    text-align: center;
+}
+
+.cetak {
+    margin-top: 2rem;
+    width: 90%;
+    height: 12.5%;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 2rem;
+    border-radius: 1rem;
+    background-image: linear-gradient(to right, var(--secondary), var(--primary));
+    color: white;
+    text-align: center;
+}
+
+.container-login {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+.container-form {
+    width: 70%;
+    text-align: left;
+}
+  
+.titled {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.inputfield {
+    margin-top: 2rem;
+}
+  
+.nama, .keluhan, .poly, .times, .tanggal {
+    padding: 10px 2rem;
+    margin: 1.5rem 0;
+    border-radius: 1rem;
+    border: 1px solid gray;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.bpjs {
+    display: flex;
+    align-items: center;
+    padding: 10px 2rem;
+    margin: 1.5rem 0;
+    border-radius: 1rem;
+    border: 1px solid gray;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.bpjs label {
+    margin-right: 10px;
+}
+
+.bpjs select {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 1rem;
+}
+  
+.button {
+    margin-top: 0.7rem;
+    width: 100%;
+    padding: 0.8rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 5rem;
+    background-image: linear-gradient(to right, var(--secondary), var(--primary));
+    color: white;
+}
+
+/* navbar start */
+.navbar {
+    width: auto;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+}
+  
+.navbar a {
+    text-decoration: none;
+    margin-right: 1rem;
+    color: #92a3df;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+/* navbar end */

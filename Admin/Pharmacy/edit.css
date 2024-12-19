@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: gray;
+}
+
+.modal {
+    margin: 5rem auto 0;
+    border-radius: 2rem;
+    width: 40vw;
+    text-align: center;
+    background-color: white ;
+}
+
+.modal-content {
+    padding: 3rem 2rem;
+}
+
+label, input, select {
+    display: block;
+    margin: 1rem auto 0;
+    width: 95%;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+input, select, button {
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+button {
+    font-size: 1rem;
+    padding: 10px 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    border: 0;
+}

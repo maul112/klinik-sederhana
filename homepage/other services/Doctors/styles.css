@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+a {
+    text-decoration: none;
+    color: #2c2e3e;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 20px; /* Space from top */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+h1 {
+    font-size: 2.3rem; /* Increased font size */
+    font-weight: 750;
+    color: #2c2e3e;
+    margin: 0 5px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    border: 1px solid #92A3FD;
+    background-color: rgba(255, 255, 255, 0.252);
+    padding: 10px 51px;
+    margin: 0 20px;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-button.active,
+.filter-button:hover {
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    color: white;
+}
+
+.doctor-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.doctor-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 15px 30px;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.doctor-card img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.doctor-info {
+    flex: 1;
+}
+
+.doctor-card h2 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+}
+
+.doctor-card p {
+    color: #777;
+    font-size: 0.9em;
+    margin: 0 0 10px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating span:first-child {
+    margin-right: 10px;
+    color: #ffdd00;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    color: #ff4d4d;
+    cursor: pointer;
+}

@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 900px;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.profile {
+    text-align: center;
+}
+
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-container .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profile-img {
+    border-radius: 50%;
+    margin: 0 20px;
+    width: 150px;    /* Ensure equal width and height for a perfect circle */
+    height: 150px;   /* Ensure equal width and height for a perfect circle */
+    object-fit: cover; /* Ensures image covers the area without distorting */
+    cursor: pointer; 
+}
+
+h1 {
+    text-transform: lowercase;
+    color: #333;
+    margin: 20px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input, select#gender {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    background: linear-gradient(to right, #92A3FD, #9DCEFF);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 2rem;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button-container button {
+    width: 48%;
+}
+
+button:hover {
+    background: linear-gradient(to right, #92A3FD, #9DCEFF);
+}
+

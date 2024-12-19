@@ -1,0 +1,118 @@
+/* styles3.css */
+body {
+    margin: 35px 0;
+    padding: 0;
+}
+/* Container for the login page */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1401px;
+    height: 650px;
+    margin: auto;
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Logo section */
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 20px;
+}
+
+/* Terms and conditions paragraph */
+.terms {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.004em;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.terms a {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Buttons container */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Create account button */
+.create-account {
+    width: 343px;
+    height: 52px;
+    background: #FFFFFF;
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.0015em;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+}
+
+.create-account:hover {
+    background: #F0F0F0;
+}
+
+/* Sign in button */
+.sign-in {
+    width: 343px;
+    height: 52px;
+    border: 1px solid #FFFFFF;
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.0015em;
+    color: #FFFFFF;
+    background: transparent;
+    cursor: pointer;
+}
+
+.sign-in:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Trouble signing in link */
+.trouble-signing-in {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.004em;
+    color: #FFFFFF;
+    text-decoration: underline;
+    margin-top: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.confirmation-box, .payment-box {
+    padding: 20px;
+    text-align: center;
+}
+
+.icon img {
+    width: 100px;
+    height: 100px;
+}
+
+.confirmation-message h2 {
+    font-size: 1.5em;
+    background: linear-gradient(90deg, #C58BF2, #92A3FD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    margin: 10px 0;
+}
+
+
+.confirmation-message p {
+    color: #888;
+}
+
+.view-appointment-btn, .continue-btn {
+    background: linear-gradient(90deg, #92A3FD, #9DCEFF);
+    border: none;
+    padding: 10px 120px;
+    color: white;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: black; /* Warna default (putih) */
+}
+
+

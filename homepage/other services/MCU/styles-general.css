@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 20px; /* Space from top */
+}
+
+.card a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+h1 {
+    font-size: 2.3rem; /* Increased font size */
+    font-weight: 750;
+    color: #2c2e3e;
+    margin: 0 5px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    border: 1px solid #92A3FD;
+    background-color: rgba(255, 255, 255, 0.252);
+    padding: 10px 51px;
+    margin: 0 20px;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-button.active,
+.filter-button:hover {
+    background: linear-gradient(274.42deg, #92A3FD 0%, #9DCEFF 124.45%);
+    color: white;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 15px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-left: 20px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card h2:hover {
+    color: #92A3FD;
+}
+
+.card p {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+li {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.card .price {
+    color: #92A3FD;
+    margin-top: 10px;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: black; /* Warna default (putih) */
+}

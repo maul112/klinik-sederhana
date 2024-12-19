@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: left;
+    padding: 20px 0;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin: 0;
+    color: #333;
+}
+
+.header h1 span {
+    color: #9b8af7;
+}
+
+.content {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: #cce0ff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 300px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.card .date {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.card .read-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #666;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.card .read-more:hover {
+    background-color: #9b8af7;
+    color: #fff;
+    border-color: #9b8af7;
+}
