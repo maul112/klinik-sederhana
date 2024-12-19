@@ -31,13 +31,17 @@ if(isset($_POST['submit'])) {
     $tempDate = $_POST['date'];
     $title = $getMCU['paket'];
     $getNoAntrian = mysqli_query($conn, "SELECT * FROM mcu WHERE title = '$title' AND date LIKE '$tempDate%' ORDER BY date DESC LIMIT 1;");
-    $getNoAntrian = (int)mysqli_fetch_assoc($getNoAntrian)['no_antrian'] + 1;
+    if(mysqli_num_rows($getNoAntrian) != 0) {
+        $getNoAntrian = (int)mysqli_fetch_assoc($getNoAntrian)['no_antrian'] + 1;
+    } else {
+        $getNoAntrian = 1;
+    }
 
     $fullname = $getUser['fullname'];
     $harga = $getMCU['harga'];
     $status = "unpaid";
     $date = $_POST['date'] . " " . $_POST['hour'];
-    $cek = mysqli_query($conn, "INSERT INTO mcu VALUES (null, '$username', '$fullname', '$title', '$harga', '$status', '$date', '$getNoAntrian', null, null, null)");
+    $cek = mysqli_query($conn, "INSERT INTO mcu VALUES (null, '$username', '$fullname', '$title', '$harga', '$status', '$date', '$getNoAntrian', null, null, null, null)");
     if($cek) {
         header("Location: ../cart/cart.php");
         exit;

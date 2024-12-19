@@ -41,7 +41,7 @@ if(isset($_POST['submit'])) {
     $harga = $getLab['harga'];
     $status = "unpaid";
     $date = $_POST['date'] . " " . $_POST['hour'];
-    $cek = mysqli_query($conn, "INSERT INTO laboratory VALUES (null, '$username', '$fullname', '$title', '$harga', '$date', '$getNoAntrian', '$status', null, null, null)");
+    $cek = mysqli_query($conn, "INSERT INTO laboratory VALUES (null, '$username', '$fullname', '$title', '$harga', '$date', '$getNoAntrian', '$status', null, null, null, null)");
     if($cek) {
         header("Location: ../cart/cart.php");
         exit;
