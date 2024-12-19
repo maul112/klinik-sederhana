@@ -114,6 +114,18 @@ if(isset($_POST["konfirmasi"])) {
     //     header("Location: confirm.php");
     //     exit;
     // }
+
+    // update stok obat
+    $getAllMedinCart = mysqli_query($conn, "SELECT * FROM med_cart WHERE username = '$username' AND status = 'unpaid'");
+    $getAllMedinCart = mysqli_fetch_all($getAllMedinCart, MYSQLI_ASSOC);
+    foreach($getAllMedinCart as $med) {
+        $medId = $med['med_id'];
+        $medQty = $med['qty'];
+        // $getMedStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM medicine WHERE id = '$medId'"))['stock'];
+        // $updateStock = $getMedStock - $medQty;
+        mysqli_query($conn, "UPDATE medicine SET stock = stock - '$medQty' WHERE id = '$medId'");
+    }
+
     // set med menjadi upcoming
     mysqli_query($conn, "UPDATE med_cart SET status = 'completed' WHERE username = '$username'");
     
