@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+unset($_SESSION['allTotal']);
+
 $username = $_SESSION["username"];
 
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
@@ -13,9 +15,9 @@ if (!$conn) {
 // Ambil antrian dengan status 'completed' untuk pengguna yang sedang aktif
 $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'completed'");
 
-if (!$temp) {
-    die("Query failed: " . mysqli_error($conn));
-}
+$mcu = mysqli_query($conn, "SELECT * FROM mcu WHERE username = '$username' AND status = 'completed'");
+$lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username' AND status = 'completed'");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +44,8 @@ if (!$temp) {
                 <div class="tab"><a href="visitReport.php">Visit Report</a></div>
             </div>
         </div>
+        <?php if(mysqli_num_rows($temp) != 0) : ?>
+        <h3 style="margin-top: 1rem;">Poly</h3>
         <div class="appointments">
             <?php while($data = mysqli_fetch_assoc($temp)) :?>
             <div class="appointment-card">
@@ -61,6 +65,53 @@ if (!$temp) {
             </div>
             <?php endwhile; ?>
         </div>
+        <?php endif ?>
+        <?php if(mysqli_num_rows($mcu) != 0) : ?>
+            <h3 style="margin-top: 1rem;">MCU</h3>
+            <div id="upcoming-appointments" class="appointments">
+                <?php while($data = mysqli_fetch_assoc($mcu)) :?>
+                <div class="appointment-card">
+                    <div class="appointment-header">
+                        <h1><?= $data['no_antrian'] ?></h1>
+                        <div class="appointment-details">
+                            <h2><?= $data["title"]?></h2>
+                            <div class="detail-container">
+                                <div class="upcoming"><?= $data["status"]?></div>
+                            </div>
+                            <div class="date-time"><?= explode(" ", $data["date"])[0]?> | <?= explode(" ", $data["date"])[1]?></div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <a href="hapus.php?id=<?= $data["id"]?>&jenis=ksandbldakdNDKBdjBD" class="btn cancel pt-2">Cancel Booking</a>
+                        <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
+                    </div>
+                </div>
+                <?php endwhile?>
+            </div>
+        <?php endif?>
+        <?php if(mysqli_num_rows($lab) != 0) : ?>
+            <h3 style="margin-top: 1rem;">Laboratory</h3>
+            <div id="upcoming-appointments" class="appointments">
+                <?php while($data = mysqli_fetch_assoc($lab)) :?>
+                <div class="appointment-card">
+                    <div class="appointment-header">
+                        <h1><?= $data['no_antrian'] ?></h1>
+                        <div class="appointment-details">
+                            <h2><?= $data["title"]?></h2>
+                            <div class="detail-container">
+                                <div class="upcoming"><?= $data["status"]?></div>
+                            </div>
+                            <div class="date-time"><?= explode(" ", $data["date"])[0]?> | <?= explode(" ", $data["date"])[1]?></div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <a href="hapus.php?id=<?= $data["id"]?>&jenis=kasjdbadnadjajdbadnjad" class="btn cancel pt-2">Cancel Booking</a>
+                        <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
+                    </div>
+                </div>
+                <?php endwhile?>
+            </div>
+        <?php endif?>
     </div>
 </body>
 </html>

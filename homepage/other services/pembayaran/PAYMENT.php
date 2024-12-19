@@ -22,7 +22,12 @@ $medTotal = mysqli_query($conn, "
     HAVING med_cart.username = '$username';
 ");
 
-$amountMed = mysqli_fetch_assoc($medTotal)['total'];
+if(mysqli_num_rows($medTotal) == 0) {
+    $amountMed = 0;
+} else {
+    $amountMed = mysqli_fetch_assoc($medTotal)['total'];
+}
+
 
 $labTotal = mysqli_query($conn, "SELECT
     SUM(harga) as total
@@ -30,7 +35,11 @@ $labTotal = mysqli_query($conn, "SELECT
     WHERE username = '$username' AND status = 'unpaid'
     GROUP BY username");
 
-$amountLab = mysqli_fetch_assoc($labTotal)['total'];
+if(mysqli_num_rows($labTotal) == 0) {
+    $amountLab = 0;
+} else {
+    $amountLab = mysqli_fetch_assoc($labTotal)['total'];
+}
 
 $MCUTotal = mysqli_query($conn, "SELECT
     SUM(harga) as total
@@ -38,7 +47,18 @@ $MCUTotal = mysqli_query($conn, "SELECT
     WHERE username = '$username' AND status = 'unpaid'
     GROUP BY username");
 
-$amountMCU = mysqli_fetch_assoc($MCUTotal)['total'];
+if(mysqli_num_rows($MCUTotal) == 0) {
+    $amountMCU = 0;
+} else {
+    $amountMCU = mysqli_fetch_assoc($MCUTotal)['total'];
+}
+
+$_SESSION['allTotal'] = $amountMed + $amountLab + $amountMCU;
+if($_SESSION['allTotal'] == 0) {
+    unset($_SESSION['allTotal']);
+    header("Location: ../cart/cart.php");
+    exit;
+}
 
 // $harga;
 // $total;
@@ -77,24 +97,34 @@ $amountMCU = mysqli_fetch_assoc($MCUTotal)['total'];
 //     $dokter = $_POST["dokter"];
 //     $total = $harga;
 // }
-
 if(isset($_POST["konfirmasi"])) {
-    if(isset($_POST["totalPrice"])) {
-        $_SESSION["keluhan"] = "kata kata rahasia wes pokoknya";
-        header("Location: confirm.php");
-        exit;
-    } else {
-        $fullname = $hasil["fullname"];
-        $date = $_POST["date"];
-        $hour = $_POST["hour"];
-        $keluhan = $_POST["keluhan"];
-        $poli = $_POST["poli"];
-        $dokter = $_POST["dokter"];
-        mysqli_query($conn, "INSERT INTO antrian VALUES ('', '$username', '$fullname', '$date', '$hour', '$keluhan', '$poli', '$dokter', 'upcoming', '')");
-        $_SESSION["keluhan"] = $keluhan;
-        header("Location: confirm.php");
-        exit;
-    }
+    // if(isset($_POST["totalPrice"])) {
+    //     $_SESSION["keluhan"] = "kata kata rahasia wes pokoknya";
+    //     header("Location: confirm.php");
+    //     exit;
+    // } else {
+    //     $fullname = $hasil["fullname"];
+    //     $date = $_POST["date"];
+    //     $hour = $_POST["hour"];
+    //     $keluhan = $_POST["keluhan"];
+    //     $poli = $_POST["poli"];
+    //     $dokter = $_POST["dokter"];
+    //     mysqli_query($conn, "INSERT INTO antrian VALUES ('', '$username', '$fullname', '$date', '$hour', '$keluhan', '$poli', '$dokter', 'upcoming', '')");
+    //     $_SESSION["keluhan"] = $keluhan;
+    //     header("Location: confirm.php");
+    //     exit;
+    // }
+    // set med menjadi upcoming
+    mysqli_query($conn, "UPDATE med_cart SET status = 'upcoming' WHERE username = '$username'");
+    
+    // set mcu menjadi upcoming
+    mysqli_query($conn, "UPDATE mcu SET status = 'upcoming' WHERE username = '$username'");
+
+    // set lab menjadi upcoming
+    mysqli_query($conn, "UPDATE laboratory SET status = 'upcoming' WHERE username = '$username'");
+
+    header("Location: ./payment-success.php");
+    exit;
 }
 
 ?>

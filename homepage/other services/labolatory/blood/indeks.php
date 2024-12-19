@@ -4,7 +4,7 @@ session_start();
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 
 if (!isset($_SESSION['username'])) {
-    header("Location: ../masuk/Create Account/create-account.php");
+    header("Location: ../../../../masuk/Create Account/create-account.php");
     exit;
 }
 

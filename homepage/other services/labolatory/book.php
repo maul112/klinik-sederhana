@@ -27,19 +27,26 @@ if(isset($_POST['submit'])) {
     $getLab = mysqli_query($conn, "SELECT * FROM lab_data WHERE id = '$labId'");
     $getLab = mysqli_fetch_assoc($getLab);
 
-    $fullname = $getUser['fullname'];
+    // ambil nomor antrian
+    $tempDate = $_POST['date'];
     $title = $getLab['kategori'] . " " . $getLab['paket'];
+    $getNoAntrian = mysqli_query($conn, "SELECT * FROM laboratory WHERE title = '$title' AND date LIKE '$tempDate%' ORDER BY date DESC LIMIT 1;");
+    if(mysqli_num_rows($getNoAntrian) != 0) {
+        $getNoAntrian = (int)mysqli_fetch_assoc($getNoAntrian)['no_antrian'] + 1;
+    } else {
+        $getNoAntrian = 1;
+    }
+
+    $fullname = $getUser['fullname'];
     $harga = $getLab['harga'];
-    $status = "upcoming";
+    $status = "unpaid";
     $date = $_POST['date'] . " " . $_POST['hour'];
-    $cek = mysqli_query($conn, "INSERT INTO laboratory VALUES (null, '$username', '$fullname', '$title', '$harga', '$date',  '$status', null, null, null)");
+    $cek = mysqli_query($conn, "INSERT INTO laboratory VALUES (null, '$username', '$fullname', '$title', '$harga', '$date', '$getNoAntrian', '$status', null, null, null)");
     if($cek) {
         header("Location: ../cart/cart.php");
         exit;
     }
 }
-
-// var_dump($hasil);
 
 ?>
 

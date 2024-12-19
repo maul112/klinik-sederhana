@@ -11,7 +11,7 @@ if (!$conn) {
 }
 
 // Ambil antrian dengan status 'completed' untuk pengguna yang sedang aktif
-$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND visit = 'sudah'");
+$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'completed'");
 
 if (!$temp) {
     die("Query failed: " . mysqli_error($conn));

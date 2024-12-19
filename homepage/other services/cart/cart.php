@@ -2,6 +2,8 @@
 // Mulai sesi
 session_start();
 
+unset($_SESSION['allTotal']);
+
 // Koneksi ke database
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 
@@ -252,7 +254,7 @@ function deleteMedCart($medId, $conn, $username) {
         </div>
     <?php endif; ?>
     <h4 style="margin-top: 1rem;">Medicine</h4>
-    <?php if (!empty($cartItems)) : ?>
+    <?php if (mysqli_num_rows($cartItems) != 0) : ?>
         <ul class="list-group">
             <?php while($item = mysqli_fetch_assoc($cartItems)): ?>
                 <li class="cart-item list-group-item d-flex justify-content-between align-items-center">

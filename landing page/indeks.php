@@ -31,7 +31,7 @@
                 <div class="welcome-text">
                     <h1>WELCOME TO CLINIC KITA SEHAT</h1>
                     <p>'Kita Sehat Clinic' is an online platform that provides integrated healthcare services. We are committed to providing the best service for your health and well-being.</p>
-                    <a href="../homepage/fitur/Detail Clinic/detailClinic.php"><button class="btn-primary">Know More</button></a>
+                    <a href="../masuk/Create Account/create-account.php"><button class="btn-primary">Know More</button></a>
                 </div>        
                 <div class="welcome-image">
                     <img src="assets/National nurses day chipotle.jpg" alt="Doctors Illustration">

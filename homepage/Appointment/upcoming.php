@@ -1,18 +1,22 @@
 <?php
-
 session_start();
 
-date_default_timezone_set("Asia/Jakarta");
+unset($_SESSION['allTotal']);
 
 $username = $_SESSION["username"];
 
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
+
+// Cek koneksi
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Ambil antrian dengan status 'upcoming' untuk pengguna yang sedang aktif
 $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'upcoming'");
 
 $mcu = mysqli_query($conn, "SELECT * FROM mcu WHERE username = '$username' AND status = 'upcoming'");
 $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username' AND status = 'upcoming'");
-
-$tanggalSekarang = date('d');
 
 ?>
 <!DOCTYPE html>
@@ -40,6 +44,7 @@ $tanggalSekarang = date('d');
                 <div class="tab"><a href="visitReport.php">Visit Report</a></div>
             </div>
         </div>
+        <?php if(mysqli_num_rows($temp) != 0) : ?>
         <h3 style="margin-top: 1rem;">Poly</h3>
         <div id="upcoming-appointments" class="appointments">
             <?php while($data = mysqli_fetch_assoc($temp)) :?>
@@ -62,13 +67,14 @@ $tanggalSekarang = date('d');
             </div>
             <?php endwhile?>
         </div>
+        <?php endif ?>
         <?php if(mysqli_num_rows($mcu) != 0) : ?>
             <h3 style="margin-top: 1rem;">MCU</h3>
             <div id="upcoming-appointments" class="appointments">
                 <?php while($data = mysqli_fetch_assoc($mcu)) :?>
                 <div class="appointment-card">
                     <div class="appointment-header">
-                        <h1>1</h1>
+                        <h1><?= $data['no_antrian'] ?></h1>
                         <div class="appointment-details">
                             <h2><?= $data["title"]?></h2>
                             <div class="detail-container">
@@ -91,6 +97,7 @@ $tanggalSekarang = date('d');
                 <?php while($data = mysqli_fetch_assoc($lab)) :?>
                 <div class="appointment-card">
                     <div class="appointment-header">
+                        <h1><?= $data['no_antrian'] ?></h1>
                         <div class="appointment-details">
                             <h2><?= $data["title"]?></h2>
                             <div class="detail-container">
