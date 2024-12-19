@@ -115,13 +115,13 @@ if(isset($_POST["konfirmasi"])) {
     //     exit;
     // }
     // set med menjadi upcoming
-    mysqli_query($conn, "UPDATE med_cart SET status = 'upcoming' WHERE username = '$username'");
+    mysqli_query($conn, "UPDATE med_cart SET status = 'upcoming' WHERE username = '$username' AND status != 'completed'");
     
     // set mcu menjadi upcoming
-    mysqli_query($conn, "UPDATE mcu SET status = 'upcoming' WHERE username = '$username'");
+    mysqli_query($conn, "UPDATE mcu SET status = 'upcoming' WHERE username = '$username' AND status != 'completed'");
 
     // set lab menjadi upcoming
-    mysqli_query($conn, "UPDATE laboratory SET status = 'upcoming' WHERE username = '$username'");
+    mysqli_query($conn, "UPDATE laboratory SET status = 'upcoming' WHERE username = '$username' AND status != 'completed'");
 
     header("Location: ./payment-success.php");
     exit;

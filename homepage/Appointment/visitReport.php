@@ -11,9 +11,9 @@ if (!$conn) {
 }
 
 // Ambil antrian dengan status 'completed' untuk pengguna yang sedang aktif
-$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'completed'");
-$mcu = mysqli_query($conn, "SELECT * FROM mcu WHERE username = '$username' AND status = 'completed' AND visit = 'sudah'");
-$lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username' AND status = 'completed' AND visit = 'sudah'");
+$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'completed' ORDER BY date LIMIT 6");
+$mcu = mysqli_query($conn, "SELECT * FROM mcu WHERE username = '$username' AND status = 'completed' AND visit = 'sudah' ORDER BY date LIMIT 6");
+$lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username' AND status = 'completed' AND visit = 'sudah' ORDER BY date LIMIT 6");
 
 if (!$temp) {
     die("Query failed: " . mysqli_error($conn));
