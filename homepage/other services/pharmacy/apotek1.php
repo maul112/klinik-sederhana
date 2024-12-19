@@ -1,10 +1,24 @@
 <?php
+
+session_start();
+
+$username = $_SESSION['username'];
+
 // Koneksi ke database
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 
 // Ambil data kategori dari tabel medicine
 $categories = mysqli_query($conn, "SELECT DISTINCT category FROM medicine");
 $medications = mysqli_query($conn, "SELECT id, medname, category FROM medicine");
+
+if(isset($_POST['addToCart'])) {
+    $medId = $_POST['medication_name'];
+    $medQty = $_POST['quantity'];
+    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '$medQty', '$username', 'unpaid')");
+    header("Location: ../cart/cart.php");
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,21 +85,21 @@ $medications = mysqli_query($conn, "SELECT id, medname, category FROM medicine")
         <div class="modal-content">
             <span class="close" onclick="document.getElementById('uploadModal').style.display='none'">&times;</span>
             <h2>Add Medication to Cart</h2>
-            <form method="POST" action="../cart/cart.php">
+            <form method="POST">
                 <label for="medication_name">Medication Name:</label>
                 <select id="medication_name" name="medication_name" required>
                     <option value="">-- Select Medication --</option>
                     <?php while ($row = mysqli_fetch_assoc($medications)): ?>
-                        <option value="<?= htmlspecialchars($row['id']) ?>">
-                            <?= htmlspecialchars($row['medname']) ?> (<?= htmlspecialchars($row['category']) ?>)
-                        </option>
+                    <option value="<?= htmlspecialchars($row['id']) ?>">
+                        <?= htmlspecialchars($row['medname']) ?> (<?= htmlspecialchars($row['category']) ?>)
+                    </option>
                     <?php endwhile; ?>
                 </select><br>
 
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" min="1" required><br>
 
-                <button type="submit" class="btn btn-primary btn-full-width">Add to Cart</button>
+                <button type="submit" name="addToCart" class="btn btn-primary btn-full-width">Add to Cart</button>
             </form>
         </div>
     </div>
