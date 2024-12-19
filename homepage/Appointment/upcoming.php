@@ -56,9 +56,8 @@ $tanggalSekarang = date('d');
                     </div>
                 </div>
                 <div class="buttons">
-                    <a href="hapus.php?id=<?= $data["id"]?>" class="btn cancel pt-2">Cancel Booking</a>
+                    <a href="hapus.php?id=<?= $data["id"]?>&jenis=asdasmdajbdadnabbdasdnjab" class="btn cancel pt-2">Cancel Booking</a>
                     <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
-
                 </div>
             </div>
             <?php endwhile?>
@@ -79,15 +78,14 @@ $tanggalSekarang = date('d');
                         </div>
                     </div>
                     <div class="buttons">
-                        <a href="hapus.php?id=<?= $data["id"]?>" class="btn cancel pt-2">Cancel Booking</a>
+                        <a href="hapus.php?id=<?= $data["id"]?>&jenis=ksandbldakdNDKBdjBD" class="btn cancel pt-2">Cancel Booking</a>
                         <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
-
                     </div>
                 </div>
                 <?php endwhile?>
             </div>
         <?php endif?>
-        <?php if(mysqli_num_rows($mcu) != 0) : ?>
+        <?php if(mysqli_num_rows($lab) != 0) : ?>
             <h3 style="margin-top: 1rem;">Laboratory</h3>
             <div id="upcoming-appointments" class="appointments">
                 <?php while($data = mysqli_fetch_assoc($lab)) :?>
@@ -102,9 +100,8 @@ $tanggalSekarang = date('d');
                         </div>
                     </div>
                     <div class="buttons">
-                        <a href="hapus.php?id=<?= $data["id"]?>" class="btn cancel pt-2">Cancel Booking</a>
+                        <a href="hapus.php?id=<?= $data["id"]?>&jenis=kasjdbadnadjajdbadnjad" class="btn cancel pt-2">Cancel Booking</a>
                         <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
-
                     </div>
                 </div>
                 <?php endwhile?>

@@ -32,7 +32,7 @@ if (isset($_POST["change"])) {
         hour = '$hour'
         WHERE id = '$id'
     ");
-    header("Location: ../upcoming.php");
+    header("Location: ../../Appointment/upcoming.php");
     exit;
 }
 
@@ -204,8 +204,8 @@ if (isset($_POST["next"])) {
     </div>
     <div class="profile-card">
         <div class="profile-details">
-            <h2><?= (isset($_GET["dokter"]))? $_GET["dokter"] : $hasil["dokter"]?></h2>
-            <p><?= (isset($_GET["poli"]))? $_GET["poli"] : $hasil["poli"]?></p>
+            <h2><?= isset($_GET["dokter"])? $_GET["dokter"] : $hasil["dokter"]?></h2>
+            <p><?= isset($_GET["poli"])? $_GET["poli"] : $hasil["poly"]?></p>
             <p><i class="bi bi-geo-alt"></i> Kenanga Ave. No. 34 Block H</p>
         </div>
         <div class="stats">
@@ -256,6 +256,5 @@ if (isset($_POST["next"])) {
         </div>
     </form>
 </div>
-
 </body>
 </html>
