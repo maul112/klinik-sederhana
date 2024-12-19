@@ -88,7 +88,7 @@ if (!$result) {
                     <div class="doctor-card">
                         <img src="<?php echo $gambarDokter; ?>" alt="<?php echo htmlspecialchars($row['fullname']); ?>">
                         <div class="doctor-info">
-                            <a href="../../book/book.php?poli=Cardiologist&dokter=<?php echo urlencode($row['username']); ?>">
+                            <a href="../../book/book.php?poli=Gastroenteritis&dokter=<?php echo urlencode($row['username']); ?>">
                                 <h2><?php echo htmlspecialchars($row['fullname']); ?></h2>
                             </a>
                             <p><?php echo htmlspecialchars($row['poli']); ?></p>

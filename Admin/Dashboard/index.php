@@ -8,8 +8,6 @@ if(!isset($_SESSION['username'])) {
 }
 
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
-$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE status = 'upcoming'");
-$jml = mysqli_fetch_all($temp);
 
 $temp2 = mysqli_query($conn, "SELECT * FROM mcu WHERE status = 'upcoming'");
 $jml2 = mysqli_fetch_all($temp2);
@@ -160,47 +158,6 @@ $data = json_encode($data);
             }
         });
     </script>
-        <div class="requests-section">
-            <h1>Appointment</h1>
-            <h3>Your Requests</h3>
-            <div class="request-summary">
-                <div><?= count($jml)?> Total Upcoming Requests</div>
-            </div>
-            <form action="" class="form" method="post">
-                <input type="text" placeholder="Search" name="keyword" class="search-field" autocomplete="off">
-                <button type="submit" name="search" class="search-btn">Search</button>
-            </form>
-            <div class="requests-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nama Pasien</th>
-                            <th>Tanggal</th>
-                            <th>Jam</th>
-                            <th>Keluhan</th>
-                            <th>Poli</th>
-                            <th>Dokter</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($jml as $jm) :?>
-                        <tr>
-                            <td><?= $jm[2]?></td>
-                            <td><?= $jm[3]?></td>
-                            <td><?= $jm[4]?></td>
-                            <td><?= $jm[5]?></td>
-                            <td><?= $jm[6]?></td>
-                            <td><?= $jm[7]?></td>
-                            <td><?= $jm[8]?></td>
-                            <td><button class="action-btn"><a href="complete.php?id=<?= $jm[0]?>" onclick="return confirm('Apakah anda yakin ingin mengubah status pasien');">complete</a></button></td>
-                        </tr>
-                        <?php endforeach?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
         <div class="requests-section">
             <h1>MEDICAL CHECK UP</h1>
             <h3>Your Requests</h3>

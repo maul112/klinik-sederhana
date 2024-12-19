@@ -9,6 +9,8 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
+$username = $_SESSION['username'];
+
 $mode;
 
 if (isset($_GET["poli"]) || isset($_GET["dokter"])) {
@@ -39,26 +41,21 @@ if (isset($_POST["change"])) {
 if (isset($_POST["next"])) {
     $date = $_POST["date"];
     $hour = $_POST["hour"];
-    $poli = $_POST["poli"];
+    $poli = $_POST["poli"]; // nama poly
     $dokter_nama = $_POST["dokter"]; // Nama dokter dari form
     $keluhan = $_POST["keluhan"];
 
-    // Cari ID dokter berdasarkan nama
-    $result = mysqli_query($conn, "SELECT id FROM dokter WHERE nama = '$dokter_nama'");
-    $dokter_row = mysqli_fetch_assoc($result);
-
-    if (!$dokter_row) {
-        die("Dokter tidak ditemukan.");
-    }
-
-    $dokter_id = $dokter_row['id']; // Ambil ID dokter
+    // query data user
+    $getUser = mysqli_query($conn, "SELECT * FROM user_data WHERE userame = '$username'");
+    $getUser = mysqli_fetch_assoc($getUser);
+    $fullname = $getUser['fullname'];
 
     // Lakukan INSERT ke tabel antrian
-    $query = "INSERT INTO antrian (date, hour, poli, dokter, keluhan)
-              VALUES ('$date', '$hour', '$poli', $dokter_id, '$keluhan')";
+    $query = "INSERT INTO antrian (username, fullname, date, hour, keluhan, poly, dokter, status)
+              VALUES ('$username', '$fullnamey', '$date', '$hour', '$keluhan', '$poli', $dokter_nama, 'unpaid')";
 
     if (mysqli_query($conn, $query)) {
-        header("Location: ../pembayaran/PAYMENT.php");
+        header("Location: ./PAYMENT.php");
         exit;
     } else {
         echo "Error: " . mysqli_error($conn);
@@ -223,7 +220,7 @@ if (isset($_POST["next"])) {
             </div>
         </div>
     </div>
-    <form method="post" action="<?= ($mode === "change")? '' : '../pembayaran/PAYMENT.php'?>">
+    <form method="post" action="<?= ($mode === "change")? '' : './PAYMENT.php'?>">
         <?php if($mode === "change") :?>
         <input type="hidden" name="id" value="<?= $id?>">
         <?php endif?>

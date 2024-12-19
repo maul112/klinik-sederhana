@@ -160,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="btn-container">
             <button type="submit" class="btn-green">Simpan</button>
-            <a href="visitReport.php" class="btn-red">Batal</a>
+            <button onclick="location.href='./'" class="btn-red">Batal</button>
         </div>
     </form>
 </div>

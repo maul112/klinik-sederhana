@@ -2,9 +2,11 @@
 session_start();
 
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
-$keluhan = $_SESSION["keluhan"];
+$keluhan = $_GET["keluhan"];
 $username = $_SESSION["username"];
-$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE keluhan = '$keluhan' AND username = '$username'");
+$dokter = $_GET["dokter"];
+$no = $_GET['no'];
+$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE dokter = '$dokter' AND keluhan = '$keluhan' AND username = '$username'");
 $hasil = mysqli_fetch_assoc($temp);
 $poly = $hasil["poly"];
 $temp1 = mysqli_query($conn, "SELECT * FROM antrian WHERE poly = '$poly' AND status = 'upcoming'");
@@ -28,7 +30,7 @@ $nomor = count($hasil2);
     <div class="container">
         <div class="left-section">
             <input type="submit" class="cetak" value="PRINT QUEUE">
-            <input type="submit" class="nomor" value="<?= $nomor?>">
+            <input type="submit" class="nomor" value="<?= $no?>">
         </div>
         <div class="container-login">
             <div class="navbar">

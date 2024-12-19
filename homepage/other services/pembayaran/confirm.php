@@ -7,19 +7,21 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
-if(!isset($_SESSION["keluhan"])) {
-    header("Location: ../../");
-    exit;
+if(isset($_SESSION['keluhan'])) {
+    $keluhan = $_SESSION["keluhan"];
+} else {
+    $keluhan = "";
 }
-
-$keluhan = $_SESSION["keluhan"];
 $username = $_SESSION["username"];
 if($keluhan === "kata kata rahasia wes pokoknya") {
     $keluhan = "kata kata rahasia wes pokoknya";
 } else {
     // Query untuk mengambil data antrian berdasarkan keluhan dan username
-    $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE keluhan = '$keluhan' AND username = '$username'");
+    $dokter = $_GET['dokter'];
+    $keluhan = $_GET['keluhan'];
+    $username = $_SESSION['username'];
+    $no = $_GET['no'];
+    $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE dokter = '$dokter' AND username = '$username' AND keluhan = '$keluhan'");
     $hasil = mysqli_fetch_assoc($temp);
 }
 ?>
@@ -43,7 +45,7 @@ if($keluhan === "kata kata rahasia wes pokoknya") {
                     <!-- Menampilkan data keluhan, dokter, tanggal, dan jam -->
                     <p>Your appointment with Dr. <?= $hasil["dokter"] ?> on <?= date("l, F j, Y", strtotime($hasil["date"])) ?> at <?= $hasil["hour"] ?></p>
                     <p><strong>Keluhan: </strong><?= $hasil["keluhan"] ?></p>
-                    <button class="view-appointment-btn" onclick="window.location.href='../Print Queue/index.php';">Print Your Queue</button>
+                    <button class="view-appointment-btn" onclick="window.location.href='../Print Queue/index.php?dokter=<?= $dokter ?>&keluhan=<?= $keluhan ?>&no=<?= $no ?>';">Print Your Queue</button>
                 <?php else :?>
                     <!-- Jika keluhan adalah kata rahasia, tampilkan tombol untuk kembali ke dashboard -->
                     <button class="view-appointment-btn" onclick="window.location.href='../../index.php';">Back To Dashboard</button>
