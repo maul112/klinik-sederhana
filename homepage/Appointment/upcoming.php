@@ -52,7 +52,9 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
                 <div class="appointment-header">
                     <img src="DR Williem Smith.png" alt="DR William Smith">
                     <div class="appointment-details">
-                        <h2><?= $data["dokter"]?></h2>
+                        <a href="../other services/Print Queue/showQueue.php?id=<?= $data['id'] ?>&jenis=poli">
+                            <h2><?= $data["dokter"]?></h2>
+                        </a>
                         <div class="detail-container">
                             <div class="spesialis"><?= $data["poly"]?> |</div>
                             <div class="upcoming"><?= $data["status"]?></div>
@@ -76,7 +78,9 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
                     <div class="appointment-header">
                         <h1><?= $data['no_antrian'] ?></h1>
                         <div class="appointment-details">
-                            <h2><?= $data["title"]?></h2>
+                            <a href="../other services/Print Queue/showQueue.php?id=<?= $data['id'] ?>&jenis=mcu">
+                                <h2><?= $data["title"]?></h2>
+                            </a>
                             <div class="detail-container">
                                 <div class="upcoming"><?= $data["status"]?></div>
                             </div>
@@ -99,7 +103,9 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
                     <div class="appointment-header">
                         <h1><?= $data['no_antrian'] ?></h1>
                         <div class="appointment-details">
-                            <h2><?= $data["title"]?></h2>
+                            <a href="../other services/Print Queue/showQueue.php?id=<?= $data['id'] ?>&jenis=lab">
+                                <h2><?= $data["title"]?></h2>
+                            </a>
                             <div class="detail-container">
                                 <div class="upcoming"><?= $data["status"]?></div>
                             </div>
