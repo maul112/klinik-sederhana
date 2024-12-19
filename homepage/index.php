@@ -6,6 +6,8 @@ if(isset($_SESSION["keluhan"])) {
     unset($_SESSION["keluhan"]);
 }
 
+date_default_timezone_set("Asia/Jakarta");
+
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 $username = $_SESSION['username'];
 $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'upcoming'");
@@ -51,15 +53,14 @@ if (!$upcomingAppointmentsQuery) {
     die('Query failed: ' . mysqli_error($conn));
 }
 
+// Get today's date and tomorrow's date
 $todayDate = date('Y-m-d');
-$todayAppointmentsQuery = mysqli_query($conn, "SELECT * FROM antrian WHERE status = 'upcoming' AND date = '$todayDate'");
-if (!$todayAppointmentsQuery) {
-    die('Query failed: ' . mysqli_error($conn));
-}
+$tomorrowDate = date('Y-m-d', strtotime("+1 day"));
 
-$upcomingAppointments = mysqli_fetch_all($upcomingAppointmentsQuery, MYSQLI_ASSOC);
-$todayAppointments = mysqli_fetch_all($todayAppointmentsQuery, MYSQLI_ASSOC);
-
+$todayAntrian = mysqli_query($conn, "SELECT * FROM antrian WHERE status = 'upcoming' AND username = '$username' AND (date = '$todayDate' OR date = '$tomorrowDate')");
+$todayMCU = mysqli_query($conn, "SELECT * FROM mcu WHERE status = 'upcoming' AND username = '$username' AND (date LIKE '$todayDate%' OR date LIKE '$tomorrowDate%')");
+$todayLab = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'upcoming' AND username = '$username' AND (date LIKE '$todayDate%' OR date LIKE '$tomorrowDate%')");
+$totalNotifications = mysqli_num_rows($todayAntrian) + mysqli_num_rows($todayMCU) + mysqli_num_rows($todayLab);
 
 $ambil_data = mysqli_query($conn, "SELECT * FROM user_data WHERE username = '$username'");
 $hasil = mysqli_fetch_assoc($ambil_data);
@@ -713,7 +714,7 @@ $countLabCart = mysqli_query($conn, "SELECT username FROM laboratory WHERE usern
             <div class="doctor-notification">
                 <a href="notif">
                     <img src="assets/pngwing.com.png" alt="Notification" class="notification-icon">
-                    <span class="notification-count"><?php echo count($todayAppointments); ?></span>
+                    <span class="notification-count"><?= $totalNotifications; ?></span>
                 </a>
                 <a href="other services/cart/cart.php" class="cart-link">
                     <img src="assets/shopping-cart.png" alt="Cart" class="cart-icon">

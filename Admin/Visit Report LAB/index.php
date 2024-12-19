@@ -52,6 +52,30 @@ $result = $stmt->get_result();
 if (!$result) {
     die("Query gagal: " . $stmt->error);
 }
+
+
+// buat chart js
+
+// Array untuk menyimpan data grafik
+
+$getDataMCU = mysqli_query($conn, "SELECT date, SUM(harga) as harga FROM laboratory
+                                                    WHERE status != 'unpaid'
+                                                    GROUP BY DATE(date)
+                                                    ORDER BY date ASC");
+
+$labels = [];
+$data = [];
+
+while ($row = mysqli_fetch_assoc($getDataMCU)) {
+    $labels[] = explode(" ", $row['date'])[0]; // Menyimpan tanggal
+    $data[] = (int) $row['harga']; // Menyimpan total transaksi
+}
+
+// Mengonversi array ke format JSON agar bisa digunakan oleh Chart.js
+$labels = json_encode($labels);
+$data = json_encode($data);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +83,7 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Jadwal Dokter</title>
     <style>
         body {
@@ -541,6 +566,55 @@ if (!$result) {
                 </div>
             </header>
             <div class="requests-section">
+                <div class="row">
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(45deg,  #92A3FD , #9DCEFF); color: #fff; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); border-radius: 3px; padding: 20px">
+                            Grafik Transaksi
+                        </div>
+                        <div class="card-body">
+                            <canvas id="transaksiChart" width="700" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                const ctx = document.getElementById('transaksiChart').getContext('2d');
+                const transaksiChart = new Chart(ctx, {
+                    type: 'line', // Jenis grafik: garis
+                    data: {
+                        labels: <?php echo $labels; ?>, // Tanggal transaksi
+                        datasets: [{
+                            label: 'Total Transaksi (Rp)', // Label untuk grafik
+                            data: <?php echo $data; ?>, // Total harga per tanggal
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna latar belakang area grafik
+                            borderColor: 'rgba(75, 192, 192, 1)', // Warna garis grafik
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true, // Responsif terhadap ukuran layar
+                        scales: {
+                            y: {
+                                beginAtZero: true, // Mulai dari angka 0
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'Rp ' + value.toLocaleString(); // Format mata uang
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    font: {
+                                        size: 14 // Ukuran font untuk legenda
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                </script>
                 <table>
                     <thead>
                         <tr>

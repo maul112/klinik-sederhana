@@ -19,13 +19,18 @@ $todayDate = date('Y-m-d');
 $tomorrowDate = date('Y-m-d', strtotime("+1 day"));
 
 // Query for upcoming appointments for today and tomorrow (H and H+1)
-$upcomingAppointmentsQuery = mysqli_query($conn, "SELECT * FROM antrian WHERE status = 'upcoming' AND (date = '$todayDate' OR date = '$tomorrowDate')");
+$upcomingAppointmentsQuery = mysqli_query($conn, "SELECT * FROM antrian WHERE status = 'upcoming' AND username = '$username' AND (date = '$todayDate' OR date = '$tomorrowDate')");
+$upcomingMCUsQuery = mysqli_query($conn, "SELECT * FROM mcu WHERE status = 'upcoming' AND username = '$username' AND (date LIKE '$todayDate%' OR date LIKE '$tomorrowDate%')");
+$upcomingLabsQuery = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'upcoming' AND username = '$username' AND (date LIKE '$todayDate%' OR date LIKE '$tomorrowDate%')");
 
 if (!$upcomingAppointmentsQuery) {
     die('Query failed: ' . mysqli_error($conn));
 }
 
 $upcomingAppointments = mysqli_fetch_all($upcomingAppointmentsQuery, MYSQLI_ASSOC);
+$upcomingMCUs = mysqli_fetch_all($upcomingMCUsQuery, MYSQLI_ASSOC);
+$upcomingLabs = mysqli_fetch_all($upcomingLabsQuery, MYSQLI_ASSOC);
+
 
 // Fetch user data (for profile picture, name, and user_id)
 $ambil_data = mysqli_query($conn, "SELECT * FROM user_data WHERE username = '$username'");
@@ -153,6 +158,30 @@ $healthHistoryReminder = empty($healthHistory) ? true : false;
             <?php endforeach; ?>
         <?php else: ?>
             <p>No upcoming appointments for today or tomorrow.</p>
+        <?php endif; ?>
+        <div class="notification-title">Upcoming MCU</div>
+        <?php if (count($upcomingMCUs) > 0): ?>
+            <?php foreach($upcomingMCUs as $MCU): ?>
+                <div class="notification-item">
+                    <p><strong>Patient:</strong> <?= $MCU['fullname'] ?></p>
+                    <p><strong>Time:</strong> <span class="MCU-time"><?= explode(" ", $MCU['date'])[1] ?></span></p>
+                    <p><strong>Judul:</strong> <?= $MCU['title'] ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No upcoming MCU for today or tomorrow.</p>
+        <?php endif; ?>
+        <div class="notification-title">Upcoming Lab</div>
+        <?php if (count($upcomingLabs) > 0): ?>
+            <?php foreach($upcomingLabs as $lab): ?>
+                <div class="notification-item">
+                    <p><strong>Patient:</strong> <?= $lab['fullname'] ?></p>
+                    <p><strong>Time:</strong> <span class="MCU-time"><?= explode(" ", $lab['date'])[1] ?></span></p>
+                    <p><strong>Judul:</strong> <?= $lab['title'] ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No upcoming Lab for today or tomorrow.</p>
         <?php endif; ?>
 
         <!-- Health History Reminder -->

@@ -106,17 +106,16 @@ $data = json_encode($data);
             <a href="index.php?logout=true" class="logout">Log Out</a>
         </header>
         <div class="requests-section">
-        <div class="row">
-        <div class="card mt-4">
-        <div class="card-header" style="background: linear-gradient(45deg,  #92A3FD , #9DCEFF); color: #fff; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); border-radius: 3px; padding: 20px">
-            Grafik Transaksi
-        </div>
-
-            <div class="card-body">
-                <canvas id="transaksiChart" width="700" height="200"></canvas>
+            <div class="row">
+                <div class="card mt-4">
+                    <div class="card-header" style="background: linear-gradient(45deg,  #92A3FD , #9DCEFF); color: #fff; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); border-radius: 3px; padding: 20px">
+                        Grafik Transaksi
+                    </div>
+                    <div class="card-body">
+                        <canvas id="transaksiChart" width="700" height="200"></canvas>
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
         </div>
 
     <script>
