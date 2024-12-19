@@ -11,7 +11,7 @@ if(!isset($_SESSION['username'])) {
 }
 $id = $_GET['id'];
 
-$result = mysqli_query($conn, "SELECT * FROM antrian WHERE id = $id");
+$result = mysqli_query($conn, "SELECT * FROM laboratory WHERE id = $id");
 
 $row = mysqli_fetch_assoc($result);
 
@@ -131,9 +131,6 @@ if (!$row) {
         <label>Tanggal</label>
         <input type="text" name="date" disabled value="<?= $row["date"] ?>"></input>
 
-        <label>Keluhan</label>
-        <input type="text" name="keluhan" disabled value="<?= $row["keluhan"] ?>"></input>
-        
         <label>Saran Dokter</label>
         <textarea name="saran" rows="3" disabled><?= $row["saran"] ?></textarea>
 
@@ -144,7 +141,7 @@ if (!$row) {
         <input name="pemeriksaan" disabled value="<?= $row["pemeriksaan"] ?>"></input>
 
         <div class="btn-container">
-            <a href="visitReport.php" class="btn-red">Kembali</a>
+            <a href="./" class="btn-red">Kembali</a>
         </div>
     </form>
 </div>

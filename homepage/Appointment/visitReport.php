@@ -12,6 +12,8 @@ if (!$conn) {
 
 // Ambil antrian dengan status 'completed' untuk pengguna yang sedang aktif
 $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'completed'");
+$mcu = mysqli_query($conn, "SELECT * FROM mcu WHERE username = '$username' AND status = 'completed' AND visit = 'sudah'");
+$lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username' AND status = 'completed' AND visit = 'sudah'");
 
 if (!$temp) {
     die("Query failed: " . mysqli_error($conn));
@@ -42,6 +44,8 @@ if (!$temp) {
                 <div class="tab active"><a href="#">Visit Report</a></div>
             </div>
         </div>
+        <?php if(mysqli_num_rows($temp) != 0) : ?>
+        <h3 style="margin-top: 1rem;">Poly</h3>
         <div class="appointments">
             <?php while($data = mysqli_fetch_assoc($temp)) :?>
             <div class="appointment-card">
@@ -63,6 +67,53 @@ if (!$temp) {
             </div>
             <?php endwhile; ?>
         </div>
+        <?php endif ?>
+        <?php if(mysqli_num_rows($mcu) != 0) : ?>
+        <h3 style="margin-top: 1rem;">MCU</h3>
+        <div class="appointments">
+            <?php while($data = mysqli_fetch_assoc($mcu)) :?>
+            <div class="appointment-card">
+                <div class="appointment-header">
+                    <img src="logo kita sehat.png" alt="Logo" class="logo">
+                    <span class="report-title">Visit Report</span>
+                </div>
+                <div class="report-body">
+                    <span class="report-date" ><?= explode(" ", $data["date"])[0] ?> | <?= explode(" ", $data["date"])[1] ?></span>
+                    <p>Name : <?= $data["fullname"]?></p>
+                    <p>Title : <?= $data["title"]?></p>
+                    <br>
+                    <p>Your Problem : <?= $data["saran"]?></p>
+                </div>
+                <div class="report-footer">
+                    <a href="visitpdfmcu.php?id=<?= $data['id'] ?>" class="pdf-button">PDF</a>
+                </div>
+            </div>
+            <?php endwhile; ?>
+        </div>
+        <?php endif ?>
+        <?php if(mysqli_num_rows($lab) != 0) : ?>
+        <h3 style="margin-top: 1rem;">Laboratory</h3>
+        <div class="appointments">
+            <?php while($data = mysqli_fetch_assoc($lab)) :?>
+            <div class="appointment-card">
+                <div class="appointment-header">
+                    <img src="logo kita sehat.png" alt="Logo" class="logo">
+                    <span class="report-title">Visit Report</span>
+                </div>
+                <div class="report-body">
+                    <span class="report-date" ><?= explode(" ", $data["date"])[0] ?> | <?= explode(" ", $data["date"])[1] ?></span>
+                    <p>Name : <?= $data["fullname"]?></p>
+                    <p>Title : <?= $data["title"]?></p>
+                    <br>
+                    <p>Your Problem : <?= $data["saran"]?></p>
+                </div>
+                <div class="report-footer">
+                    <a href="visitpdflab.php?id=<?= $data['id'] ?>" class="pdf-button">PDF</a>
+                </div>
+            </div>
+            <?php endwhile; ?>
+        </div>
+        <?php endif ?>
     </div>
 </body>
 </html>

@@ -9,16 +9,18 @@ if(!isset($_SESSION['username'])) {
     header("Location: ../../masuk/Create Account/create-account.php");
     exit;
 }
-$id = $_GET['id'];
 
-$result = mysqli_query($conn, "SELECT * FROM antrian WHERE id = $id");
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    header("Location: ./");
+    exit;
+}
+
+$result = mysqli_query($conn, "SELECT * FROM mcu WHERE id = $id");
 
 $row = mysqli_fetch_assoc($result);
 
-if (!$row) {
-    header("Location: visitReport.php"); 
-    exit;
-}
 //$username = $_SESSION['username'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $obat = $_POST['obat']; 
     $pemeriksaan = $_POST['pemeriksaan'];
 
-    $query = "UPDATE antrian SET saran = '$saran', obat = '$obat', pemeriksaan = '$pemeriksaan', visit = 'sudah' WHERE id = $id";
+    $query = "UPDATE mcu SET saran = '$saran', obat = '$obat', pemeriksaan = '$pemeriksaan', visit = 'sudah', status = 'completed' WHERE id = '$id'";
     if (mysqli_query($conn, $query)) {
-        header("Location: visitReport.php"); 
+        header("Location: ./"); 
         exit;
     } else {
         echo "Error: " . mysqli_error($conn);
@@ -142,13 +144,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form action="" method="post">
         <label>Nama Pasien</label>
         <input type="text" name="nama" disabled value="<?= $row["fullname"]?>"></input>
-
         <label>Tanggal</label>
         <input type="text" name="date" disabled value="<?= $row["date"]?>"></input>
 
-        <label>Keluhan</label>
-        <input type="text" name="keluhan" disabled value="<?= $row["keluhan"]?>"></input>
-        
         <label>Saran Dokter</label>
         <textarea name="saran" rows="3" required placeholder="Masukkan Saran Anda"></textarea>
 
@@ -160,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="btn-container">
             <button type="submit" class="btn-green">Simpan</button>
-            <a href="visitReport.php" class="btn-red">Batal</a>
+            <button onclick="location.href='./'" class="btn-red">Batal</button>
         </div>
     </form>
 </div>

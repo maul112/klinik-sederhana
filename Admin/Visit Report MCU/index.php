@@ -13,7 +13,6 @@ if (!$conn) {
 
 $temp = mysqli_query($conn, "SELECT * FROM mcu WHERE status = 'completed'");
 
-
 // Ambil username dari sesi
 $username = $_SESSION['username'];
 
@@ -67,6 +66,8 @@ if (!$result) {
             margin: 0;
             padding: 0; 
             overflow-y: auto;
+            width: 100vw;
+            max-width: 100vw;
         }
         .container {
             margin: auto;
@@ -158,7 +159,7 @@ if (!$result) {
             padding: 20px;
             background-color: #f5f5f5;
             transition: margin-left 0.3s ease;
-            width: 100%; /* Full width initially */
+            width: 97%; /* Full width initially */
             margin-left: 0; /* No margin initially */
         }
 
@@ -290,6 +291,7 @@ if (!$result) {
             padding: 10px 20px;
             font-size: 14px;
             cursor: pointer;
+            display: inline-block;
         }
 
         .view {
@@ -544,29 +546,25 @@ if (!$result) {
                 <table>
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Pasien</th>
                             <th>Tanggal</th>
                             <th>Jam</th>
-                            <th>Keluhan</th>
-                            <th>Poli</th>
-                            <th>Dokter</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($data = mysqli_fetch_assoc($temp)) : ?>
+                        <?php $no = 0; while ($data = mysqli_fetch_assoc($temp)) : ?>
                             <tr>
+                                <td><?= $no += 1?></td>
                                 <td><?= htmlspecialchars($data["fullname"]) ?></td>
-                                <td><?= htmlspecialchars($data["date"]) ?></td>
-                                <td><?= htmlspecialchars($data["hour"]) ?></td>
-                                <td><?= htmlspecialchars($data["keluhan"]) ?></td>
-                                <td><?= htmlspecialchars($data["poly"]) ?></td>
-                                <td><?= htmlspecialchars($data["dokter"]) ?></td>
+                                <td><?= htmlspecialchars(explode(" ", $data["date"])[0]) ?></td>
+                                <td><?= htmlspecialchars(explode(" ", $data["date"])[1]) ?></td>
                                 <td><?= htmlspecialchars($data["status"]) ?></td>
                                 <td>
                                     <?php if ($data["visit"] === "sudah") : ?>
-                                        <button class="view" onclick="location.href='view_visit.php?id=<?= urlencode($data['id']) ?>'">View Visit</button>
+                                        <button class="view" onclick="location.href='visit_report.php?id=<?= urlencode($data['id']) ?>'">View Visit</button>
                                     <?php else : ?>
                                         <button class="add" onclick="location.href='add_visit.php?id=<?= urlencode($data['id']) ?>'">ADD VISIT</button>
                                     <?php endif; ?>

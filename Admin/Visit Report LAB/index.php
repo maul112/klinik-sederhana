@@ -11,7 +11,7 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$temp = mysqli_query($conn, "SELECT * FROM antrian WHERE status = 'completed'");
+$temp = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'completed'");
 
 
 // Ambil username dari sesi
@@ -544,31 +544,27 @@ if (!$result) {
                 <table>
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Pasien</th>
                             <th>Tanggal</th>
                             <th>Jam</th>
-                            <th>Keluhan</th>
-                            <th>Poli</th>
-                            <th>Dokter</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($data = mysqli_fetch_assoc($temp)) : ?>
+                        <?php $no = 0; while ($data = mysqli_fetch_assoc($temp)) : ?>
                             <tr>
+                                <td><?= $no += 1?></td>
                                 <td><?= htmlspecialchars($data["fullname"]) ?></td>
-                                <td><?= htmlspecialchars($data["date"]) ?></td>
-                                <td><?= htmlspecialchars($data["hour"]) ?></td>
-                                <td><?= htmlspecialchars($data["keluhan"]) ?></td>
-                                <td><?= htmlspecialchars($data["poly"]) ?></td>
-                                <td><?= htmlspecialchars($data["dokter"]) ?></td>
+                                <td><?= htmlspecialchars(explode(" ", $data["date"])[0]) ?></td>
+                                <td><?= htmlspecialchars(explode(" ", $data["date"])[1]) ?></td>
                                 <td><?= htmlspecialchars($data["status"]) ?></td>
                                 <td>
                                     <?php if ($data["visit"] === "sudah") : ?>
-                                        <button class="view" onclick="location.href='view_visit.php?id=<?= urlencode($data['id']) ?>'">View Visit</button>
+                                        <button class="view" onclick="location.href='./view_visit.php?id=<?= urlencode($data['id']) ?>'">View Visit</button>
                                     <?php else : ?>
-                                        <button class="add" onclick="location.href='add_visit.php?id=<?= urlencode($data['id']) ?>'">ADD VISIT</button>
+                                        <button class="add" onclick="location.href='./add_visit.php?id=<?= urlencode($data['id']) ?>'">ADD VISIT</button>
                                     <?php endif; ?>
                                 </td>
                             </tr>

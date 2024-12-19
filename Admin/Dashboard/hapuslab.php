@@ -11,7 +11,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 
 if(isset($_GET)) {
     $id = $_GET["id"];
-    mysqli_query($conn, "DELETE FROM laboratory WHERE id = '$id'");
+    mysqli_query($conn, "UPDATE laboratory SET status = 'completed' WHERE id = '$id'");
     header("Location: index.php");
     exit;
 }

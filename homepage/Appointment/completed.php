@@ -17,7 +17,6 @@ $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' 
 
 $mcu = mysqli_query($conn, "SELECT * FROM mcu WHERE username = '$username' AND status = 'completed'");
 $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username' AND status = 'completed'");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +60,7 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
                     </div>
                 </div>
                 <!-- <button class="btn bookAgain"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Book Again</a></button> -->
-                <button class="btn bookAgain"><a href="">Book Again</a></button>
+                <button class="btn bookAgain"><a href="../other services/Doctors/indeks.php">Book Again</a></button>
             </div>
             <?php endwhile; ?>
         </div>
@@ -76,15 +75,12 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
                         <div class="appointment-details">
                             <h2><?= $data["title"]?></h2>
                             <div class="detail-container">
-                                <div class="upcoming"><?= $data["status"]?></div>
+                                <div class="completed"><?= $data["status"]?></div>
                             </div>
                             <div class="date-time"><?= explode(" ", $data["date"])[0]?> | <?= explode(" ", $data["date"])[1]?></div>
                         </div>
                     </div>
-                    <div class="buttons">
-                        <a href="hapus.php?id=<?= $data["id"]?>&jenis=ksandbldakdNDKBdjBD" class="btn cancel pt-2">Cancel Booking</a>
-                        <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
-                    </div>
+                    <button class="btn bookAgain"><a href="../other services/MCU/indeks.php">Book Again</a></button>
                 </div>
                 <?php endwhile?>
             </div>
@@ -99,15 +95,12 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
                         <div class="appointment-details">
                             <h2><?= $data["title"]?></h2>
                             <div class="detail-container">
-                                <div class="upcoming"><?= $data["status"]?></div>
+                                <div class="completed"><?= $data["status"]?></div>
                             </div>
                             <div class="date-time"><?= explode(" ", $data["date"])[0]?> | <?= explode(" ", $data["date"])[1]?></div>
                         </div>
                     </div>
-                    <div class="buttons">
-                        <a href="hapus.php?id=<?= $data["id"]?>&jenis=kasjdbadnadjajdbadnjad" class="btn cancel pt-2">Cancel Booking</a>
-                        <button class="btn reschedule"><a href="../other services/book/book.php?id=<?= $data["id"]?>">Reschedule</a></button>
-                    </div>
+                    <button class="btn bookAgain"><a href="../other services/labolatory/labolatory.php">Book Again</a></button>
                 </div>
                 <?php endwhile?>
             </div>
