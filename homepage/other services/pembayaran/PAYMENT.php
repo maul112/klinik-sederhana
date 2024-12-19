@@ -2,6 +2,8 @@
 
 session_start();
 
+date_default_timezone_set("Asia/Jakarta");
+
 $username = $_SESSION['username'];
 
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
@@ -127,7 +129,8 @@ if(isset($_POST["konfirmasi"])) {
     }
 
     // set med menjadi upcoming
-    mysqli_query($conn, "UPDATE med_cart SET status = 'completed' WHERE username = '$username'");
+    $now = date("Y-m-d H:i:s");
+    mysqli_query($conn, "UPDATE med_cart SET status = 'completed', waktu_transaksi = '$now'  WHERE username = '$username'");
     
     // set mcu menjadi upcoming
     mysqli_query($conn, "UPDATE mcu SET status = 'upcoming' WHERE username = '$username' AND status != 'completed'");

@@ -50,10 +50,11 @@ if(isset($_GET['logout']) && $_GET['logout'] === 'true') {
 }
 
 // Ambil data transaksi dan totalnya
-$query = "SELECT tanggal_transaksi, SUM(total_harga) AS total_harga 
-          FROM transaksi 
-          GROUP BY tanggal_transaksi 
-          ORDER BY tanggal_transaksi";
+$query = "SELECT med_cart.waktu_transaksi as tanggal_transaksi, SUM(qty*medicine.harga) AS total_harga 
+          FROM med_cart
+          JOIN medicine ON medicine.id = med_cart.med_id
+          GROUP BY med_cart.waktu_transaksi 
+          ORDER BY med_cart.waktu_transaksi";
 $result = mysqli_query($conn, $query);
 
 // Array untuk menyimpan data grafik
@@ -61,7 +62,7 @@ $labels = [];
 $data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $labels[] = $row['tanggal_transaksi']; // Menyimpan tanggal
+    $labels[] = explode(" ", $row['tanggal_transaksi'])[0]; // Menyimpan tanggal
     $data[] = (int) $row['total_harga']; // Menyimpan total transaksi
 }
 

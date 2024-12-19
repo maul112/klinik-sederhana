@@ -190,7 +190,7 @@ function decrementQty($medId, $conn, $username) {
 }
 
 function insertMedCart($medId, $conn, $username) {
-    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '1', '$username', 'unpaid')");
+    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '1', '$username', 'unpaid', null)");
 }
 
 function deleteMedCart($medId, $conn, $username) {
