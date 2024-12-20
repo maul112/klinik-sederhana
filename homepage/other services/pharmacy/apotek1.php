@@ -4,6 +4,8 @@ session_start();
 
 $username = $_SESSION['username'];
 
+date_default_timezone_set("Asia/Jakarta");
+
 // Koneksi ke database
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 
@@ -14,7 +16,15 @@ $medications = mysqli_query($conn, "SELECT id, medname, category FROM medicine")
 if(isset($_POST['addToCart'])) {
     $medId = $_POST['medication_name'];
     $medQty = $_POST['quantity'];
-    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '$medQty', '$username', 'unpaid')");
+    $now = date("Y-m-d H:i:s");
+    
+    // ambil stock obat
+    $getMedStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM medicine WHERE id = '$medId'"))['stock'];
+    if($getMedStock < $medQty) {
+        $medQty = $getMedStock;
+    }
+
+    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '$medQty', '$username', 'unpaid', '$now')");
     header("Location: ../cart/cart.php");
     exit;
 }
