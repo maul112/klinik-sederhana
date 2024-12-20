@@ -10,19 +10,16 @@ if (!$conn) {
 }
 
 // Ambil data transaksi dan gabungkan dengan tabel medicine
-$query = 
-    "SELECT 
-    t.id_transaksi, 
-    m.medname AS nama_medicine, 
-    t.jumlah, 
-    t.total_harga, 
-    t.tanggal_transaksi 
+$query = "SELECT 
+    med_cart.id as id_transaksi,
+    medicine.medname AS nama_medicine,
+    med_cart.qty as jumlah,
+    SUM(med_cart.qty*medicine.harga) as total_harga,
+    med_cart.waktu_transaksi as tanggal_transaksi
 FROM 
-    transaksi t
-INNER JOIN 
-    medicine m ON t.id_medicine = m.id
-ORDER BY 
-    t.tanggal_transaksi DESC";
+    med_cart
+JOIN medicine ON medicine.id = med_cart.med_id
+GROUP BY med_cart.med_id";
 $hasil = mysqli_query($conn, $query);
 
 if (!$hasil) {
