@@ -125,7 +125,12 @@ if(isset($_POST["konfirmasi"])) {
         $medQty = $med['qty'];
         // $getMedStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM medicine WHERE id = '$medId'"))['stock'];
         // $updateStock = $getMedStock - $medQty;
-        mysqli_query($conn, "UPDATE medicine SET stock = stock - '$medQty' WHERE id = '$medId'");
+        // get stock
+        $getMedicineStock = mysqli_query($conn, "SELECT * FROM medicine WHERE id = '$medId'");
+        $getMedicineStock = mysqli_fetch_assoc($getMedicineStock);
+        if($getMedicineStock['stock'] >= $medQty) {
+            mysqli_query($conn, "UPDATE medicine SET stock = stock - '$medQty' WHERE id = '$medId'");
+        }
     }
 
     // set med menjadi upcoming

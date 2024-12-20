@@ -11,7 +11,7 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$temp = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'complete'");
+$temp = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'completed'");
 $labData = mysqli_fetch_all($temp, MYSQLI_ASSOC);
 
 // Ambil username dari sesi

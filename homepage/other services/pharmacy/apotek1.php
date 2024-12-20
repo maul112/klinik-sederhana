@@ -14,21 +14,29 @@ $categories = mysqli_query($conn, "SELECT DISTINCT category FROM medicine");
 $medications = mysqli_query($conn, "SELECT id, medname, category FROM medicine");
 
 if(isset($_POST['addToCart'])) {
-    $medId = $_POST['medication_name'];
-    $medQty = $_POST['quantity'];
     $now = date("Y-m-d H:i:s");
     
-    // ambil stock obat
-    $getMedStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM medicine WHERE id = '$medId'"))['stock'];
-    if($getMedStock < $medQty) {
-        $medQty = $getMedStock;
+    // ambil obat dengan status saran dokter
+    $saranDokter = mysqli_query($conn, "SELECT * FROM med_cart WHERE username = '$username' AND status = 'saran dokter'");
+    $saranDokter = mysqli_fetch_all($saranDokter, MYSQLI_ASSOC);
+    foreach($saranDokter as $obatDariCart) {
+        // ambil stock obat
+        $medId = $obatDariCart['med_id'];
+        $medCartId = $obatDariCart['id'];
+        $getMedStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM medicine WHERE id = '$medId'"))['stock'];
+        if($getMedStock < $medQty) {
+            $medQty = $getMedStock;
+        }
+        mysqli_query($conn, "UPDATE med_cart SET status = 'unpaid' WHERE id = '$medCartId'");
     }
-
-    mysqli_query($conn, "INSERT INTO med_cart VALUES (null, '$medId', '$medQty', '$username', 'unpaid', '$now')");
     header("Location: ../cart/cart.php");
     exit;
 }
 
+// obat saran dokter
+
+$obatSaranDokter = mysqli_query($conn, "SELECT * FROM med_cart JOIN medicine ON medicine.id = med_cart.med_id WHERE username = '$username' AND status = 'saran dokter'");
+$obatSaranDokter = mysqli_fetch_all($obatSaranDokter, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,20 +103,12 @@ if(isset($_POST['addToCart'])) {
         <div class="modal-content">
             <span class="close" onclick="document.getElementById('uploadModal').style.display='none'">&times;</span>
             <h2>Add Medication to Cart</h2>
-            <form method="POST">
-                <label for="medication_name">Medication Name:</label>
-                <select id="medication_name" name="medication_name" required>
-                    <option value="">-- Select Medication --</option>
-                    <?php while ($row = mysqli_fetch_assoc($medications)): ?>
-                    <option value="<?= htmlspecialchars($row['id']) ?>">
-                        <?= htmlspecialchars($row['medname']) ?> (<?= htmlspecialchars($row['category']) ?>)
-                    </option>
-                    <?php endwhile; ?>
-                </select><br>
-
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" min="1" required><br>
-
+            <ul>
+                <?php foreach($obatSaranDokter as $data) : ?>
+                <li><?= $data['medname'] ?> | <?= $data['qty'] ?> buah</li>
+                <?php endforeach ?>
+            </ul>
+            <form action="" method="post">
                 <button type="submit" name="addToCart" class="btn btn-primary btn-full-width">Add to Cart</button>
             </form>
         </div>

@@ -149,6 +149,16 @@ if (!$row1) {
             text-decoration: none;
         }
 
+        .obat-list {
+            margin: 0;
+            font-weight: 300;
+        }
+
+        @media print {
+            #cetak, #lanjut {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -186,7 +196,15 @@ if (!$row1) {
                 </li>
                 <li>
                     <strong>Resep Obat : <br>
-                    <ul><?= $row["obat"] ?><br><br></ul>
+                    <?php foreach(explode(",", $row['obat']) as $obatId) : ?>
+                    <?php
+                    $medicine = mysqli_query($conn, "SELECT * FROM medicine JOIN med_cart ON medicine.id = med_cart.med_id WHERE medicine.id = '$obatId'");
+                    $medicine = mysqli_fetch_assoc($medicine);
+                    if($medicine) {
+                        echo "<p class='obat-list'>- ". $medicine['medname'] . " (" . $medicine['qty'] ." buah)</p>";
+                    }
+                    ?>
+                    <?php endforeach ?>
                 </li>
                 <li>
                     <strong>Jadwal Pemeriksaan Berikutnya : <br>
@@ -194,9 +212,9 @@ if (!$row1) {
                 </li>
             </ul>
         </div>
-        <button onclick="window.print()" style="background-color: #7A5AF8">Cetak PDF</button>
+        <button id="cetak" onclick="window.print()" style="background-color: #7A5AF8">Cetak PDF</button>
         <br>
-        <button  style="background-color: #488fcb"><a href="lanjutvisit.php?id=<?= $row['id'] ?>">Lanjutkan Kunjungan</a></button>
+        <button id="lanjut" style="background-color: #488fcb"><a href="lanjutvisit.php?id=<?= $row['id'] ?>">Lanjutkan Kunjungan</a></button>
     </div>
 </body>
 </html>

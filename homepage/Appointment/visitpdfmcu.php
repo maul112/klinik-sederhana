@@ -145,6 +145,11 @@ if (!$row1) {
             text-decoration: none;
         }
 
+        .obat-list {
+            margin: 0;
+            font-weight: 300;
+        }
+
         @media print {
             #cetak, #lanjut {
                 display: none;
@@ -181,7 +186,15 @@ if (!$row1) {
                 </li>
                 <li>
                     <strong>Resep Obat : <br>
-                    <ul><?= $row["obat"] ?><br><br></ul>
+                    <?php foreach(explode(",", $row['obat']) as $obatId) : ?>
+                    <?php
+                    $medicine = mysqli_query($conn, "SELECT * FROM medicine JOIN med_cart ON medicine.id = med_cart.med_id WHERE medicine.id = '$obatId'");
+                    $medicine = mysqli_fetch_assoc($medicine);
+                    if($medicine) {
+                        echo "<p class='obat-list'>- ". $medicine['medname'] . " (" . $medicine['qty'] ." buah)</p>";
+                    }
+                    ?>
+                    <?php endforeach ?>
                 </li>
             </ul>
         </div>

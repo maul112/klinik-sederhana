@@ -9,23 +9,30 @@ if(!isset($_SESSION['username'])) {
     header("Location: ../../masuk/Create Account/create-account.php");
     exit;
 }
+
 $id = $_GET['id'];
 
 $result = mysqli_query($conn, "SELECT * FROM antrian WHERE id = $id");
 
 $row = mysqli_fetch_assoc($result);
 
-if (!$row) {
-    header("Location: visitReport.php"); 
-    exit;
-}
-//$username = $_SESSION['username'];
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['antrianId'];
     $saran = $_POST['saran'];
-    $obat = $_POST['obat']; 
     $pemeriksaan = $_POST['pemeriksaan'];
+
+    $medIds = $_POST['med_id'];
+    $jumlahs = $_POST['jumlah'];
+    $obat = "";
+
+    $getUsername = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM antrian WHERE id = '$id'"))['username'];
+
+    for($i = 0; $i < count($medIds); $i++) {
+        $medId = $medIds[$i];
+        $jumlah = $jumlahs[$i];
+        mysqli_query($conn, "INSERT INTO med_cart VALUES(null, '$medId', '$jumlah', '$getUsername', 'saran dokter', null)");
+        $obat = $obat . $medId . ",";
+    }
 
     $query = "UPDATE antrian SET saran = '$saran', obat = '$obat', pemeriksaan = '$pemeriksaan', visit = 'sudah' WHERE id = $id";
     if (mysqli_query($conn, $query)) {
@@ -36,12 +43,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+$medData = mysqli_query($conn, "SELECT * FROM medicine");
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Tambah Hasil Pemeriksaan</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -155,7 +166,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <textarea name="saran" rows="3" required placeholder="Masukkan Saran Anda"></textarea>
 
         <label>Resep Obat</label>
-        <textarea name="obat" rows="3" required placeholder="Masukkan Resep Obat"></textarea>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="krsTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Obat</th>
+                        <th>Jumlah</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="krsBody">
+                    <tr class="krs-row">
+                        <td>1</td>
+                        <td>
+                            <select class="form-select" name="med_id[]" aria-label="Pilih Obat" onchange="updateSKS()" required>
+                                <option value="" selected disabled required>Pilih Obat</option>
+                                <?php foreach ($medData as $matkul) : ?>
+                                    <option value="<?= $matkul["id"] ?>" data-sks="<?= $matkul['stock'] ?>"><?= $matkul["medname"] ?> | <?= $matkul['category'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" name="jumlah[]" required>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-danger removeBtn">Hapus</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary " id="addMataKuliah">Tambah Obat</button>
+        </div>
 
         <label>Pemeriksaan Selanjutnya dapat Dilakukan pada</label>
         <input type="date" name="pemeriksaan"></input>
@@ -166,6 +208,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </form>
 </div>
+<script>
+    $(document).ready(function() {
+        // Fungsi untuk menambah baris baru
+        $('#addMataKuliah').click(function() {
+            let rowCount = $('#krsBody tr').length + 1;
+            let newRow = $('.krs-row:first').clone();
 
+
+            newRow.find('select').val('');
+            newRow.find('input').val('');
+
+
+            newRow.find('td:first').text(rowCount);
+
+
+            $('#krsBody').append(newRow);
+        });
+
+
+        $(document).on('click', '.removeBtn', function() {
+            if ($('#krsBody tr').length > 1) {
+                $(this).closest('tr').remove();
+                updateSKS();
+                updateIPK();
+            } else {
+                alert('Anda harus memiliki setidaknya satu list obat.');
+            }
+        });
+    });
+</script>
 </body>
 </html>

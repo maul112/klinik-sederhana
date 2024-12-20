@@ -118,6 +118,11 @@ if (!$row) {
             display: inline-block;
             text-decoration: none;
         }
+
+        .obat-list {
+            margin: 0;
+            font-weight: 300;
+        }
     </style>
 </head>
 <body>
@@ -135,7 +140,15 @@ if (!$row) {
         <textarea name="saran" rows="3" disabled><?= $row["saran"] ?></textarea>
 
         <label>Resep Obat</label>
-        <textarea name="obat" rows="3" disabled><?= $row["obat"] ?></textarea>
+        <?php foreach(explode(",", $row['obat']) as $obatId) : ?>
+        <?php
+        $medicine = mysqli_query($conn, "SELECT * FROM medicine JOIN med_cart ON medicine.id = med_cart.med_id WHERE medicine.id = '$obatId'");
+        $medicine = mysqli_fetch_assoc($medicine);
+        if($medicine) {
+            echo "<p class='obat-list'>- ". $medicine['medname'] . " (" . $medicine['qty'] ." buah)</p>";
+        }
+        ?>
+        <?php endforeach ?>
 
         <div class="btn-container">
             <a href="./" class="btn-red">Kembali</a>

@@ -30,7 +30,7 @@ if(isset($_POST['submit'])) {
     // ambil nomor antrian
     $tempDate = $_POST['date'];
     $title = $getLab['kategori'] . " " . $getLab['paket'];
-    $getNoAntrian = mysqli_query($conn, "SELECT * FROM laboratory WHERE title = '$title' AND date LIKE '$tempDate%' ORDER BY date DESC LIMIT 1;");
+    $getNoAntrian = mysqli_query($conn, "SELECT * FROM laboratory WHERE title = '$title' AND date LIKE '$tempDate%' ORDER BY no_antrian DESC LIMIT 1;");
     if(mysqli_num_rows($getNoAntrian) != 0) {
         $getNoAntrian = (int)mysqli_fetch_assoc($getNoAntrian)['no_antrian'] + 1;
     } else {
