@@ -27,15 +27,17 @@ if (isset($_GET["id"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hour = $_POST["hour"];
     $id = $_POST["id"];
+    $date = $_POST['date'];
 
     // Update jam kunjungan
-    mysqli_query($conn, "UPDATE antrian SET
-        hour = '$hour'
-        WHERE id = '$id'
-    ");
+    // mysqli_query($conn, "UPDATE antrian SET
+    //     hour = '$hour'
+    //     WHERE id = '$id'
+    // ");
 
     // Arahkan ke pembayaran setelah perubahan selesai
-    header("Location: ../other services/pembayaran/PAYMENT.php?id=$id");
+    
+    header("Location: ../other services/book/PAYMENT.php?nsbasudjb=$id&kasdnkak=$hour&abfasjfjab=$date");
     exit;
 }
 
@@ -109,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         <div class="mb-3">
             <label for="tanggal" class="form-label">Tanggal</label>
-            <input type="text" id="tanggal" class="form-control" value="<?= $hasil['date'] ?>" disabled>
+            <input type="text" id="tanggal" name="date" class="form-control" value="<?= $hasil['pemeriksaan'] ?>" disabled>
         </div>
         <div class="mb-3">
             <label for="hour" class="form-label">Jam</label>

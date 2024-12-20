@@ -16,7 +16,7 @@ $result = mysqli_query($conn, "SELECT * FROM antrian WHERE id = $id");
 $row = mysqli_fetch_assoc($result);
 
 if (!$row) {
-    header("Location: visitReport.php"); 
+    header("Location: ./"); 
     exit;
 }
 //$username = $_SESSION['username'];
@@ -144,7 +144,7 @@ if (!$row) {
         <input name="pemeriksaan" disabled value="<?= $row["pemeriksaan"] ?>"></input>
 
         <div class="btn-container">
-            <a href="visitReport.php" class="btn-red">Kembali</a>
+            <a href="./" class="btn-red">Kembali</a>
         </div>
     </form>
 </div>

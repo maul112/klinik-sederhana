@@ -39,9 +39,22 @@ if(isset($_POST['konfirmasi'])) {
         $no_antrian = (int)mysqli_fetch_assoc($getAntrian)['no_antrian'] + 1;
     }
 
-    mysqli_query($conn, "INSERT INTO antrian VALUES (null, '$username', '$fullname', '$date', '$hour', '$keluhan', '$poli', '$dokter', 'upcoming', '', null, '$no_antrian')");
+    mysqli_query($conn, "INSERT INTO antrian VALUES (null, '$username', '$fullname', '$date', '$hour', '$keluhan', '$poli', '$dokter', 'upcoming', '', null, '$no_antrian', null, null, null)");
     header("Location: ../pembayaran/confirm.php?dokter=$dokter&keluhan=$keluhan&no=$no_antrian");
     exit;
+}
+
+if(isset($_GET['nsbasudjb'])) {
+    // ambil harga
+    // ambil data yang diperlukan di form
+    $antrianId = $_GET['nsbasudjb'];
+    $getPoli = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM antrian WHERE id = '$antrianId'"));
+    $poli = $getPoli['poly'];
+    $amountMed = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM poli WHERE poli_name = '$poli'"))['harga'];
+    $dokter = $getPoli['dokter'];
+    $date = $_GET['abfasjfjab'];
+    $hour = $_GET['kasdnkak'];
+    $keluhan = $getPoli['keluhan'];
 }
 
 ?>

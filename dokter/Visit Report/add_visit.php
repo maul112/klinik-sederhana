@@ -22,13 +22,14 @@ if (!$row) {
 //$username = $_SESSION['username'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['antrianId'];
     $saran = $_POST['saran'];
     $obat = $_POST['obat']; 
     $pemeriksaan = $_POST['pemeriksaan'];
 
     $query = "UPDATE antrian SET saran = '$saran', obat = '$obat', pemeriksaan = '$pemeriksaan', visit = 'sudah' WHERE id = $id";
     if (mysqli_query($conn, $query)) {
-        header("Location: visitReport.php"); 
+        header("Location: ./"); 
         exit;
     } else {
         echo "Error: " . mysqli_error($conn);
@@ -140,6 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h2>Tambah Hasil Pemeriksaan</h2>
     <form action="" method="post">
+        <input type="hidden" name="antrianId" value="<?= $id ?>">
         <label>Nama Pasien</label>
         <input type="text" name="nama" disabled value="<?= $row["fullname"]?>"></input>
 
