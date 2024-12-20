@@ -11,8 +11,8 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$temp = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'completed'");
-
+$temp = mysqli_query($conn, "SELECT * FROM laboratory WHERE status = 'complete'");
+$labData = mysqli_fetch_all($temp, MYSQLI_ASSOC);
 
 // Ambil username dari sesi
 $username = $_SESSION['username'];
@@ -627,9 +627,9 @@ $data = json_encode($data);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 0; while ($data = mysqli_fetch_assoc($temp)) : ?>
+                        <?php foreach($labData as $no => $data) : ?>
                             <tr>
-                                <td><?= $no += 1?></td>
+                                <td><?= $no ?></td>
                                 <td><?= htmlspecialchars($data["fullname"]) ?></td>
                                 <td><?= htmlspecialchars(explode(" ", $data["date"])[0]) ?></td>
                                 <td><?= htmlspecialchars(explode(" ", $data["date"])[1]) ?></td>
@@ -642,7 +642,7 @@ $data = json_encode($data);
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

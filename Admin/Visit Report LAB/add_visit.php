@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $obat = $_POST['obat']; 
     $pemeriksaan = $_POST['pemeriksaan'];
 
-    $query = "UPDATE laboratory SET saran = '$saran', obat = '$obat', pemeriksaan = '$pemeriksaan', visit = 'sudah', status = 'completed' WHERE id = $id";
+    $query = "UPDATE laboratory SET saran = '$saran', obat = '$obat', visit = 'sudah', status = 'completed' WHERE id = $id";
     if (mysqli_query($conn, $query)) {
         header("Location: ./");
         exit;
@@ -151,9 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label>Resep Obat</label>
         <textarea name="obat" rows="3" required placeholder="Masukkan Resep Obat"></textarea>
-
-        <label>Pemeriksaan Selanjutnya dapat Dilakukan pada</label>
-        <input type="date" name="pemeriksaan"></input>
 
         <div class="btn-container">
             <button type="submit" class="btn-green">Simpan</button>

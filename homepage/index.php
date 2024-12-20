@@ -11,7 +11,6 @@ date_default_timezone_set("Asia/Jakarta");
 $conn = mysqli_connect('localhost', 'root', '', 'db_klinik');
 $username = $_SESSION['username'];
 $temp = mysqli_query($conn, "SELECT * FROM antrian WHERE username = '$username' AND status = 'upcoming'");
-// var_dump(mysqli_num_rows($temp)); die;
 if(mysqli_num_rows($temp) > 3) {
     $jumlah = 3;
 } else {
@@ -736,7 +735,7 @@ $countLabCart = mysqli_query($conn, "SELECT username FROM laboratory WHERE usern
             <?php for($i = 0; $i < (int) $jumlah; $i++) :?>
             <div class="appointment-card">
                 <div class="appointment-header">
-                    <img src="other services/Doctors/doctor.png" alt="DR William Smith">
+                    <img src="../userProfile/<?php $dokter = $appointment[$i][7]; echo mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM dokter WHERE username = '$dokter'"))['gambar'] ?>" alt="dokter">
                     <div class="appointment-details">
                         <h2><?= $appointment[$i][7]?></h2>
                         <div class="detail-container">

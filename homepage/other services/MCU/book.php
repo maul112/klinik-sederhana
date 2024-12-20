@@ -41,7 +41,7 @@ if(isset($_POST['submit'])) {
     $harga = $getMCU['harga'];
     $status = "unpaid";
     $date = $_POST['date'] . " " . $_POST['hour'];
-    $cek = mysqli_query($conn, "INSERT INTO mcu VALUES (null, '$username', '$fullname', '$title', '$harga', '$status', '$date', '$getNoAntrian', null, null, null, null)");
+    $cek = mysqli_query($conn, "INSERT INTO mcu VALUES (null, '$username', '$fullname', '$title', '$harga', '$status', '$date', '$getNoAntrian', null, null, null)");
     if($cek) {
         header("Location: ../cart/cart.php");
         exit;

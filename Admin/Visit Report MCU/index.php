@@ -11,7 +11,8 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$temp = mysqli_query($conn, "SELECT * FROM mcu WHERE status = 'completed'");
+$temp = mysqli_query($conn, "SELECT * FROM mcu WHERE status = 'complete'");
+$mcuData = mysqli_fetch_all($temp, MYSQLI_ASSOC);
 
 // Ambil username dari sesi
 $username = $_SESSION['username'];
@@ -567,7 +568,7 @@ $data = json_encode($data);
                 </div>
             </header>
             <div class="requests-section">
-            <div class="row">
+                <div class="row">
                     <div class="card mt-4">
                         <div class="card-header" style="background: linear-gradient(45deg,  #92A3FD , #9DCEFF); color: #fff; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); border-radius: 3px; padding: 20px">
                             Grafik Transaksi
@@ -628,9 +629,9 @@ $data = json_encode($data);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 0; while ($data = mysqli_fetch_assoc($temp)) : ?>
+                        <?php foreach($mcuData as $no => $data) : ?>
                             <tr>
-                                <td><?= $no += 1?></td>
+                                <td><?= $no?></td>
                                 <td><?= htmlspecialchars($data["fullname"]) ?></td>
                                 <td><?= htmlspecialchars(explode(" ", $data["date"])[0]) ?></td>
                                 <td><?= htmlspecialchars(explode(" ", $data["date"])[1]) ?></td>
@@ -643,7 +644,7 @@ $data = json_encode($data);
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

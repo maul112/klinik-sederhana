@@ -183,15 +183,9 @@ if (!$row1) {
                     <strong>Resep Obat : <br>
                     <ul><?= $row["obat"] ?><br><br></ul>
                 </li>
-                <li>
-                    <strong>Jadwal Pemeriksaan Berikutnya : <br>
-                    <ul><?= $row["pemeriksaan"] ?><br><br></ul>
-                </li>
             </ul>
         </div>
         <button id="cetak" onclick="window.print()" style="background-color: #7A5AF8">Cetak PDF</button>
-        <br>
-        <button id="lanjut" style="background-color: #488fcb"><a href="lanjutvisit.php?id=<?= $row['id'] ?>">Lanjutkan Kunjungan</a></button>
     </div>
 </body>
 </html>

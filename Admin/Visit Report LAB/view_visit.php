@@ -137,9 +137,6 @@ if (!$row) {
         <label>Resep Obat</label>
         <textarea name="obat" rows="3" disabled><?= $row["obat"] ?></textarea>
 
-        <label>Pemeriksaan Selanjutnya dapat Dilakukan pada</label>
-        <input name="pemeriksaan" disabled value="<?= $row["pemeriksaan"] ?>"></input>
-
         <div class="btn-container">
             <a href="./" class="btn-red">Kembali</a>
         </div>
