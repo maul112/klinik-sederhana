@@ -49,7 +49,7 @@ $lab = mysqli_query($conn, "SELECT * FROM laboratory WHERE username = '$username
             <?php while($data = mysqli_fetch_assoc($temp)) :?>
             <div class="appointment-card">
                 <div class="appointment-header">
-                    <img src="DR Williem Smith.png" alt="DR William Smith">
+                    <img src="../../userProfile/<?php $dokterUsername = $data['dokter']; echo mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM dokter WHERE username = '$dokterUsername'"))['gambar']?? '' ?>" alt="dokter">
                     <div class="appointment-details">
                         <h2><?= $data["dokter"]?></h2>
                         <div class="detail-container">
