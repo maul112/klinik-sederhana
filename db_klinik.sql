@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2024 at 06:04 PM
+-- Generation Time: Dec 20, 2024 at 07:08 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,32 +37,34 @@ CREATE TABLE `antrian` (
   `poly` varchar(50) NOT NULL,
   `dokter` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `pdf` varchar(50) NOT NULL
+  `pdf` varchar(50) NOT NULL,
+  `visit` varchar(50) DEFAULT NULL,
+  `no_antrian` int(11) NOT NULL,
+  `saran` varchar(500) DEFAULT NULL,
+  `pemeriksaan` date DEFAULT NULL,
+  `obat` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `antrian`
 --
 
-INSERT INTO `antrian` (`id`, `username`, `fullname`, `date`, `hour`, `keluhan`, `poly`, `dokter`, `status`, `pdf`) VALUES
-(31, 'fatimah', 'Fatimah Azzahra ', '2024-06-01', '11:00 AM', 'sakit kepala', 'General', 'Dr Janneth William', 'completed', 'visitReport.pdf'),
-(32, 'fatimah', 'Fatimah Azzahra ', '2024-07-06', '11:00 AM', 'sakit kaki', 'General', 'Dr Reinath Salsa', 'completed', 'visitReport.pdf'),
-(33, 'fatimah', 'Fatimah Azzahra ', '2024-07-12', '10:00 AM', 'sakit di bagian dada', 'Cardiologist', 'Dr Edith Farith', 'upcoming', ''),
-(35, 'yasmin', 'Yasmin azzahra', '2024-07-15', '10:30 AM', 'agak pusing pilek panas', 'General', 'Dr Reinath Salsa', 'upcoming', ''),
-(36, 'yasmin', 'Yasmin azzahra', '2024-08-24', '14:30 PM', 'telinga agak berdengung', 'Otology', 'Dr Janneth William', 'upcoming', ''),
-(37, 'Dew', 'Dewi Massitoh', '2024-06-30', '14:00 PM', 'lambung sakit', 'Gastroenteritis', 'Dr Edith Farith', 'upcoming', ''),
-(38, 'wiwik', 'Wiwik Ainun Janah', '2005-07-11', '10:30 AM', 'sakit kepala', 'General', 'Dr William Smith', 'upcoming', ''),
-(39, 'khoir', 'siti khoirul muzaroah', '2024-07-07', '09:30 AM', 'sakit', 'Gastroenteritis', 'Dr Reinath Salsa', 'completed', ''),
-(40, 'fatimah', 'Fatimah Azzahra ', '2024-07-16', '09:30 AM', 'sakit boyok', 'General', 'Dr William Smith', 'upcoming', ''),
-(41, 'ciawra', 'w', '2024-07-01', '09:30 AM', 'sakit mata', 'General', 'Dr William Smith', 'upcoming', ''),
-(42, 'wiwik', 'Wiwik Ainun Janah', '0033-03-12', '09:30 AM', 'sakit', 'General', 'Dr William Smith', 'upcoming', ''),
-(43, 'fatimah', 'Fatimah Azzahra ', '2004-06-12', '10:00 AM', 'sakit', 'General', 'Dr William Smith', 'upcoming', ''),
-(44, 'fatimah', 'Fatimah Azzahra ', '2024-06-12', '09:30 AM', 'sakit', 'General', 'Dr Reinath Salsa', 'upcoming', ''),
-(45, 'maharani', 'a', '2024-07-01', '09:30 AM', 'sakit', 'General', 'Dr Janneth William', 'upcoming', ''),
-(46, 'khoir', 'siti khoirul muzaroah', '2024-12-07', '15:00 PM', 'sakittt', 'General', 'Janneth William', 'upcoming', ''),
-(47, 'Fatimah', 'Fatimah Azzahra ', '2024-12-17', '11:00 AM', 'akitt', 'Orthopaedic', 'Liam Hermawan', 'upcoming', ''),
-(48, 'Fatimah', 'Fatimah Azzahra ', '0000-00-00', '', '', '', '', 'upcoming', ''),
-(49, 'yasmin', 'Yasmin azzahra', '2024-12-13', '11:00 AM', 'awww', 'Cardiologist', 'Edith Farith', 'upcoming', '');
+INSERT INTO `antrian` (`id`, `username`, `fullname`, `date`, `hour`, `keluhan`, `poly`, `dokter`, `status`, `pdf`, `visit`, `no_antrian`, `saran`, `pemeriksaan`, `obat`) VALUES
+(31, 'Fatimah', 'Fatimah Azzahra ', '2024-06-01', '11:00 AM', 'sakit kepala', 'General', 'Janneth William', 'completed', 'visitReport.pdf', 'sudah', 1, 'jaga kesehatan', '2024-12-21', '5,'),
+(32, 'Fatimah', 'Fatimah Azzahra ', '2024-07-06', '11:00 AM', 'sakit kaki', 'General', 'Reinath Salsa', 'completed', 'visitReport.pdf', NULL, 1, NULL, NULL, NULL),
+(35, 'yasmin', 'Yasmin azzahra', '2024-07-15', '10:30 AM', 'agak pusing pilek panas', 'General', 'Reinath Salsa', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(36, 'yasmin', 'Yasmin azzahra', '2024-08-24', '14:30 PM', 'telinga agak berdengung', 'Otology', 'Janneth William', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(37, 'Dew', 'Dewi Massitoh', '2024-06-30', '14:00 PM', 'lambung sakit', 'Gastroenteritis', 'Edith Farith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(38, 'wiwik', 'Wiwik Ainun Janah', '2005-07-11', '10:30 AM', 'sakit kepala', 'General', 'William Smith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(39, 'khoir', 'siti khoirul muzaroah', '2024-07-07', '09:30 AM', 'sakit', 'Gastroenteritis', 'Reinath Salsa', 'completed', '', NULL, 1, NULL, NULL, NULL),
+(40, 'Fatimah', 'Fatimah Azzahra ', '2024-07-16', '09:30 AM', 'sakit boyok', 'General', 'William Smith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(41, 'ciawra', 'w', '2024-07-01', '09:30 AM', 'sakit mata', 'General', 'William Smith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(42, 'wiwik', 'Wiwik Ainun Janah', '0033-03-12', '09:30 AM', 'sakit', 'General', 'William Smith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(43, 'fatimah', 'Fatimah Azzahra ', '2004-06-12', '10:00 AM', 'sakit', 'General', 'William Smith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(45, 'maharani', 'a', '2024-07-01', '09:30 AM', 'sakit', 'General', 'Janneth William', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(46, 'khoir', 'siti khoirul muzaroah', '2024-12-07', '15:00 PM', 'sakittt', 'General', 'Janneth William', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(49, 'yasmin', 'Yasmin azzahra', '2024-12-13', '11:00 AM', 'awww', 'Cardiologist', 'Edith Farith', 'upcoming', '', NULL, 1, NULL, NULL, NULL),
+(59, 'Fatimah', 'Fatimah Azzahra ', '0000-00-00', '11:00 AM', 'sakit kepala', 'General', 'Janneth William', 'completed', '', NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -245,25 +247,27 @@ CREATE TABLE `laboratory` (
   `title` varchar(50) NOT NULL,
   `harga` varchar(50) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `no_antrian` int(11) NOT NULL,
   `status` varchar(50) NOT NULL,
   `saran` varchar(500) DEFAULT NULL,
-  `pemeriksaan` date DEFAULT NULL,
-  `visit` varchar(500) DEFAULT NULL
+  `visit` varchar(500) DEFAULT NULL,
+  `obat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `laboratory`
 --
 
-INSERT INTO `laboratory` (`id`, `username`, `fullname`, `title`, `harga`, `date`, `status`, `saran`, `pemeriksaan`, `visit`) VALUES
-(5, 'fatimah', 'Fatimah Azzahra ', 'Biomolekuler Paket 1', '510000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(6, 'yasmin', 'Yasmin azzahra', 'Blood Paket 2', '750000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(7, 'Dew', 'Dewi Massitoh', 'Blood Paket 1', '510000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(8, 'Dew', 'Dewi Massitoh', 'Blood Paket 2', '750000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(9, 'wiwik', 'Wiwik Ainun Janah', 'KULTUR / RESISTEN', '510000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(10, 'khoir', 'siti khoirul muzaroah', 'Biomolekuler Paket 2', '750000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(11, 'Fatimah', 'Fatimah Azzahra ', 'Paket 2', '750000', '2024-12-18 15:46:47', 'upcoming', NULL, NULL, NULL),
-(12, 'Fatimah', 'Fatimah Azzahra ', 'Parasitology Taksonomi', '500000', '2024-12-18 02:30:00', 'upcoming', NULL, NULL, NULL);
+INSERT INTO `laboratory` (`id`, `username`, `fullname`, `title`, `harga`, `date`, `no_antrian`, `status`, `saran`, `visit`, `obat`) VALUES
+(7, 'Dew', 'Dewi Massitoh', 'Blood Paket 1', '510000', '2024-12-18 15:46:47', 1, 'unpaid', NULL, NULL, NULL),
+(8, 'Dew', 'Dewi Massitoh', 'Blood Paket 2', '750000', '2024-12-18 15:46:47', 1, 'unpaid', NULL, NULL, NULL),
+(9, 'wiwik', 'Wiwik Ainun Janah', 'KULTUR / RESISTEN', '510000', '2024-12-18 15:46:47', 1, 'unpaid', NULL, NULL, NULL),
+(10, 'khoir', 'siti khoirul muzaroah', 'Biomolekuler Paket 2', '750000', '2024-12-18 15:46:47', 1, 'unpaid', NULL, NULL, NULL),
+(19, 'yasmin', 'Yasmin azzahra', 'Biomolekuler Paket 1', '510000', '2024-12-18 02:30:00', 2, 'upcoming', NULL, NULL, NULL),
+(24, 'Fatimah', 'Fatimah Azzahra ', 'Mikrobiologi Kultur / Resisten', '510000', '2024-12-20 02:30:00', 1, 'completed', 'Jaga Kesehatan', 'sudah', 'Indomie'),
+(25, 'Fatimah', 'Fatimah Azzahra ', 'Mikrobiologi Kultur / Resisten', '510000', '2024-12-20 02:30:00', 2, 'completed', 'sering ke lab', 'sudah', 'html'),
+(26, 'Fatimah', 'Fatimah Azzahra ', 'Mikrobiologi Kultur / Resisten', '510000', '2024-12-20 02:30:00', 2, 'completed', 'jaga', 'sudah', '5,6,'),
+(30, 'Fatimah', 'Fatimah Azzahra ', 'Mikrobiologi Kultur / Resisten', '510000', '2024-12-20 02:30:00', 3, 'completed', 'ayo ke lab', 'sudah', '11,4,6,');
 
 -- --------------------------------------------------------
 
@@ -312,22 +316,24 @@ CREATE TABLE `mcu` (
   `harga` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `no_antrian` int(11) NOT NULL,
   `saran` varchar(500) DEFAULT NULL,
-  `pemeriksaan` date DEFAULT NULL,
-  `visit` varchar(500) DEFAULT NULL
+  `visit` varchar(500) DEFAULT NULL,
+  `obat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mcu`
 --
 
-INSERT INTO `mcu` (`id`, `username`, `fullname`, `title`, `harga`, `status`, `date`, `saran`, `pemeriksaan`, `visit`) VALUES
-(170, 'yasmin', 'Yasmin azzahra', 'MCU General Practitioner Consultation', '500000', 'upcoming', '2024-12-18 14:40:12', NULL, NULL, NULL),
-(171, 'Dew', 'Dewi Massitoh', 'School Age', '750000', 'upcoming', '2024-12-18 14:40:12', NULL, NULL, NULL),
-(173, 'wiwik', 'Wiwik Ainun Janah', 'Basic Screening', '499000', 'upcoming', '2024-12-18 14:40:12', NULL, NULL, NULL),
-(174, 'wiwik', 'Wiwik Ainun Janah', 'Basic Screening', '499000', 'upcoming', '2024-12-18 14:40:12', NULL, NULL, NULL),
-(175, 'khoir', 'siti khoirul muzaroah', 'Basic Screening', '499000', 'upcoming', '2024-12-18 14:40:12', NULL, NULL, NULL),
-(177, 'Fatimah', 'Fatimah Azzahra ', 'Pre School', '510000', 'upcoming', '2024-12-18 02:30:00', NULL, NULL, NULL);
+INSERT INTO `mcu` (`id`, `username`, `fullname`, `title`, `harga`, `status`, `date`, `no_antrian`, `saran`, `visit`, `obat`) VALUES
+(171, 'Dew', 'Dewi Massitoh', 'School Age', '750000', 'upcoming', '2024-12-18 14:40:12', 1, NULL, NULL, NULL),
+(173, 'wiwik', 'Wiwik Ainun Janah', 'Basic Screening', '499000', 'upcoming', '2024-12-18 13:40:12', 1, NULL, NULL, NULL),
+(174, 'wiwik', 'Wiwik Ainun Janah', 'Basic Screening', '499000', 'upcoming', '2024-12-18 14:40:15', 2, NULL, NULL, NULL),
+(175, 'khoir', 'siti khoirul muzaroah', 'Basic Screening', '499000', 'upcoming', '2024-12-19 14:40:20', 1, NULL, NULL, NULL),
+(184, 'Fatimah', 'Fatimah Azzahra ', 'Heart Risk Factors 1', '500000', 'completed', '2024-12-20 02:30:00', 1, 'Lebih banyak istirahat', 'sudah', 'Antangin'),
+(185, 'Fatimah', 'Fatimah Azzahra ', 'Heart Risk Factors 1', '500000', 'completed', '2024-12-20 02:30:00', 2, 'makan yang banyak', 'sudah', 'energen'),
+(186, 'Fatimah', 'Fatimah Azzahra ', 'Heart Risk Factors 1', '500000', 'completed', '2024-12-20 02:30:00', 2, 'ppppp', 'sudah', '5,3,');
 
 -- --------------------------------------------------------
 
@@ -390,7 +396,7 @@ CREATE TABLE `medicine` (
 --
 
 INSERT INTO `medicine` (`id`, `medname`, `category`, `stock`, `deskripsi`, `harga`, `medgambar`) VALUES
-(3, 'Panadol Extra 10 Kaplet', 'Pills', 30, 'PANADOL EXTRA merupakan obat dengan kandungan Paracetamol dan Caffeine. Obat ini dapat digunakan untuk meringankan sakit kepala dan sakit gigi. Paracetamol sebagai analgetik, bekerja dengan meningkatkan ambang rasa sakit dan Caffeine bekerja dengan mengha', '15500', 'panadol.png'),
+(3, 'Panadol Extra 10 Kaplet', 'Pills', 20, 'PANADOL EXTRA merupakan obat dengan kandungan Paracetamol dan Caffeine. Obat ini dapat digunakan untuk meringankan sakit kepala dan sakit gigi. Paracetamol sebagai analgetik, bekerja dengan meningkatkan ambang rasa sakit dan Caffeine bekerja dengan mengha', '15500', 'panadol.png'),
 (4, 'Hansaplast Salep Luka 20g', 'External Medications', 30, ' Hansaplast Salep Luka 20 g merupakan salep penutup luka dengan kandungan white petrolatum, thin paraffin oil, ceresin wax, glycerin, panthenol, glyceryl stearate. Formulasi pada produk ini digunakan untuk membantu proses penyembuhan luka dengan mengurang', '50500', 'hansaplast.png'),
 (5, 'Tolak Angin Cair', 'Syrup', 100, 'TOLAK ANGIN CAIR PLUS MADU merupakan obat herbal terstandar yang mengandung kombinasi berbagai herbal alami yang dapat digunakan untuk membantu memelihara atau menjaga daya tahan tubuh dan meringankan gejala masuk angin.', '19100', 'tolakangin.png'),
 (6, 'Enervon-C 4 Tablet', 'Pills', 20, 'ENERVON C merupakan suplemen makanan dengan kandungan multivitamin seperti Vitamin C, Vitamin B1, Vitamin B2, Vitamin B6, Vitamin B12, Vitamin D, Niacinamide, Kalsium pantotenat dalam bentuk tablet salut. Suplemen vitamin ini berguna untuk membantu menjag', '6500', 'enervon.png'),
@@ -410,17 +416,27 @@ CREATE TABLE `med_cart` (
   `id` int(11) NOT NULL,
   `med_id` int(255) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
-  `username` varchar(50) DEFAULT NULL
+  `username` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `waktu_transaksi` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `med_cart`
 --
 
-INSERT INTO `med_cart` (`id`, `med_id`, `qty`, `username`) VALUES
-(45, 6, 1, 'Fatimah'),
-(46, 3, 1, 'Fatimah'),
-(48, 4, 1, 'Fatimah');
+INSERT INTO `med_cart` (`id`, `med_id`, `qty`, `username`, `status`, `waktu_transaksi`) VALUES
+(48, 4, 1, 'Fatimah', 'completed', '2024-12-20 16:44:39'),
+(55, 3, 12, 'Fatimah', 'completed', '2024-12-20 16:44:39'),
+(58, 3, 9, 'Fatimah', 'completed', '2024-12-20 16:44:39'),
+(61, 3, 5, 'Fatimah', 'completed', '2024-12-20 16:44:39'),
+(65, 5, 5, 'Fatimah', 'unpaid', NULL),
+(66, 3, 5, 'Fatimah', 'unpaid', NULL),
+(69, 3, 5, 'Fatimah', 'unpaid', NULL),
+(70, 6, 6, 'Fatimah', 'unpaid', NULL),
+(71, 11, 5, 'Fatimah', 'unpaid', NULL),
+(72, 4, 3, 'Fatimah', 'unpaid', NULL),
+(73, 6, 1, 'Fatimah', 'unpaid', NULL);
 
 -- --------------------------------------------------------
 
@@ -694,7 +710,7 @@ ALTER TABLE `user_data`
 -- AUTO_INCREMENT for table `antrian`
 --
 ALTER TABLE `antrian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `dokter`
@@ -730,7 +746,7 @@ ALTER TABLE `kiat_news`
 -- AUTO_INCREMENT for table `laboratory`
 --
 ALTER TABLE `laboratory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `lab_data`
@@ -742,7 +758,7 @@ ALTER TABLE `lab_data`
 -- AUTO_INCREMENT for table `mcu`
 --
 ALTER TABLE `mcu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `mcu_data`
@@ -760,7 +776,7 @@ ALTER TABLE `medicine`
 -- AUTO_INCREMENT for table `med_cart`
 --
 ALTER TABLE `med_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `riwayat_kesehatan`
